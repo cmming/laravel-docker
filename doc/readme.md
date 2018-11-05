@@ -23,3 +23,23 @@
     ALTER USER 'default'@'%' IDENTIFIED WITH mysql_native_password BY 'secret'; // Alter命令更改用户来更改用户密码的加密
     ```
     
+    
+3. 进入工作区
+    
+    ```
+     #重新构建容器 修改完配置文件后 重新 打包
+     docker-compose build workspace
+     docker-compose exec workspace bash
+     #更改时区 workspace TZ
+    ```
+    
+4. 系统维护模式
+    ```
+    php artisan down #关闭 
+    php artisan up  #开启
+    ```
+    
+5. 创建model
+    ```
+    php artisan make:model Models/Test #推荐
+    ```
