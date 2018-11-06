@@ -18,6 +18,21 @@ securityDefinitions:
 
 #定义接口数据
 paths:
+  /auth/register:
+      post:
+        tags:
+          - 用户登录
+        summary: 用户注册
+        produces:
+          - application/json
+        parameters:
+          - name: body
+            description: 注册对象
+            in: body
+            type: string
+            schema:
+              $ref: '#/definitions/RegisterForm'
+            required: true
   /captcha.jpg:
     get:
       tags:
@@ -34,7 +49,7 @@ paths:
   /auth/login:
     post:
       tags:
-        - 用户登录1
+        - 用户登录
       summary: 用户登录
       produces:
         - application/json
@@ -1041,6 +1056,18 @@ definitions:
         msg:
           description: 失败原因
           type: string
+  RegisterForm:
+      type: object
+      properties:
+        name:
+          description: 用户名
+          type: string
+        email:
+          description: 邮箱
+          type: string
+        password:
+          description: 密码
+          type: string
   LoginForm:
     type: object
     properties:
@@ -1049,12 +1076,6 @@ definitions:
         type: string
       password:
         description: 密码
-        type: string
-      captcha:
-        description: 验证码
-        type: string
-      uuid:
-        description: UUID
         type: string
   PasswordForm:
     type: object
