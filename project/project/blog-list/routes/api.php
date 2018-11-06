@@ -30,13 +30,8 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 
-    Route::get('test', 'AuthController@test');
-    Route::post('register', 'AuthController@register');
+    Route::post('register', 'AuthController@register')->name('register');
 
 });
 
-Route::middleware('jwt.auth')->get('users', function () {
-    dd(1);
-    return auth('api')->user();
-});
 
