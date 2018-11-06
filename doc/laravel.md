@@ -18,6 +18,8 @@
 
     ```
     composer update
+    #生成 密钥
+    php artisan jwt:secret
     
 
 

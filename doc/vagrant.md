@@ -29,6 +29,16 @@ logout
 
 
 
+1. 创建一个快照
+    vagrant snapshot take "Name"
+2. 查看快照列表
+    vagrant snapshot list
+3. 从指定快照中恢复
+    vagrant snapshot go "Name"
+4. 删除一个快照
+    vagrant snapshot delete "Name"
+
+
 
 
 
