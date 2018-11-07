@@ -22,4 +22,10 @@ class RegisterController extends Controller
 
         return response()->json(['message' => 'Successfully Register']);
     }
+
+
+    public function reset(Request $request){
+        $user = User::where('email','=',$request->input('email'))->first();
+        $user->sendPasswordResetNotification('qww');
+    }
 }

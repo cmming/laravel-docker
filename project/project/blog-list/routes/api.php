@@ -35,6 +35,7 @@ Route::group([
     'prefix' => 'user'
 ], function ($router) {
     Route::post('register', 'User\RegisterController@register')->name('register');
+    Route::get('reset', 'User\RegisterController@reset')->name('reset');
 });
 
 
