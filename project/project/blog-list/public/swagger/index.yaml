@@ -13,12 +13,12 @@ schemes:
 securityDefinitions:
   api_key:
     type: "apiKey"
-    name: "token"
+    name: "Authorization"
     in: "header"
 
 #定义接口数据
 paths:
-  /auth/register:
+  /user/register:
       post:
         tags:
           - 用户登录
@@ -65,6 +65,21 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/Login'
+  /auth/logout:
+      post:
+        tags:
+          - 用户登录
+        summary: 用户登出
+  /auth/me:
+        post:
+          tags:
+            - 用户登录
+          summary: 获取用户信息
+  /auth/refresh:
+        post:
+          tags:
+            - 用户登录
+          summary: 刷新token
 
   /sys/user/list:
     get:
