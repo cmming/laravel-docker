@@ -1,5 +1,5 @@
 安装 jwt
-
+https://laravel-china.org/articles/10885/full-use-of-jwt#c932c8
 
 
 

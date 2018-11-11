@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-
+//,'verified' 邮箱验证中间件 后期制作
 Route::group([
     'middleware' => ['api'],
     'prefix' => 'auth',
@@ -35,6 +35,7 @@ Route::group([
     'prefix' => 'user'
 ], function ($router) {
     Route::post('register', 'User\RegisterController@register')->name('register');
+    //发送邮箱重置的 邮件
     Route::get('reset', 'User\RegisterController@reset')->name('reset');
 });
 

@@ -33,6 +33,19 @@ paths:
             schema:
               $ref: '#/definitions/RegisterForm'
             required: true
+  /user/reset:
+      get:
+        tags:
+          - 用户登录
+        summary: 发送邮件
+      produces:
+          - application/json
+      parameters:
+          - name: email
+            description: 邮箱
+            in: query
+            type: string
+            required: true
   /captcha.jpg:
     get:
       tags:

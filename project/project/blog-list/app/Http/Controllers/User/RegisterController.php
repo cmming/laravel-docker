@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 use App\User;
 
@@ -26,6 +27,9 @@ class RegisterController extends Controller
 
     public function reset(Request $request){
         $user = User::where('email','=',$request->input('email'))->first();
-        $user->sendPasswordResetNotification('qww');
+//        $user = User::find(7);
+        $token = JWTAuth::fromUser($user);
+//        var_dump($token);exit();
+        $user->sendPasswordResetNotification($token);
     }
 }

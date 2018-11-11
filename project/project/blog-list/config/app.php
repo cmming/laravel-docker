@@ -78,8 +78,8 @@ return [
     |
     */
 
-    'locale' => 'en',
-
+//    'locale' => 'en',
+    'locale' => 'zh-CN',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
