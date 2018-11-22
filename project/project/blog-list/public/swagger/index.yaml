@@ -18,6 +18,19 @@ securityDefinitions:
 
 #定义接口数据
 paths:
+  /mail/sendMailToRegister:
+          get:
+            tags:
+              - 用户登录
+            summary: 用户注册邮箱验证码
+          produces:
+            - application/json
+          parameters:
+            - name: email
+              description: 邮箱
+              in: query
+              type: string
+              required: true
   /user/register:
       post:
         tags:
@@ -33,19 +46,6 @@ paths:
             schema:
               $ref: '#/definitions/RegisterForm'
             required: true
-  /user/reset:
-      get:
-        tags:
-          - 用户登录
-        summary: 发送邮件
-      produces:
-          - application/json
-      parameters:
-          - name: email
-            description: 邮箱
-            in: query
-            type: string
-            required: true
   /captcha.jpg:
     get:
       tags:
@@ -60,7 +60,7 @@ paths:
           type: string
           required: true
   /auth/login:
-    post:
+    put:
       tags:
         - 用户登录
       summary: 用户登录
@@ -94,7 +94,7 @@ paths:
             - 用户登录
           summary: 刷新token
 
-  /sys/user/list:
+  /user/list:
     get:
       tags:
         - 管理员管理
@@ -1067,6 +1067,43 @@ definitions:
         msg:
           description: 失败原因
           type: string
+  Meta:
+    type: object
+    properties:
+      pagination:
+        type: object
+        properties:
+          total:
+            description: 总记录数
+            type: integer
+            format: int32
+          count:
+            description: 当前页的数量
+            type: integer
+            format: int32
+          per_page:
+            description: 前一页的页数
+            type: integer
+            format: int32
+          current_page:
+            description: 当前页
+            type: integer
+            format: int32
+          total_pages:
+            description: 总页数
+            type: integer
+            format: int32
+          links:
+            type: object
+            description:
+               previous:
+                description: 上一页的地址
+                type: string
+               next:
+                description: 下一页的地址
+                type: string
+
+
   Login:
       type: object
       properties:
@@ -1096,6 +1133,9 @@ definitions:
         password:
           description: 密码
           type: string
+        code:
+          description: 验证码
+          type: string
   LoginForm:
     type: object
     properties:
@@ -1117,70 +1157,40 @@ definitions:
   SysUserEntity:
     type: object
     properties:
-      userId:
+      id:
         description: 用户ID
         type: integer
         format: int64
-      username:
+      name:
         description: 用户名
-        type: string
-      password:
-        description: 密码
         type: string
       email:
         description: 邮箱
         type: string
-      mobile:
-        description: 手机号
-        type: string
-      status:
-        description: 状态  0：禁用   1：正常
-        type: integer
-        format: int32
       roleIdList:
         description: 角色ID列表
         type: array
         items:
           type: integer
           format: int64
-      createUserId:
-        description: 创建者ID
-        type: integer
-        format: int64
-      createTime:
+      created_at:
         description: 创建时间
+        type: string
+        format: date-time
+      updated_at:
+        description: 修改时间
         type: string
         format: date-time
   SysUserEntityList:
     type: object
     properties:
-      code:
-        description: 状态码 0：成功  非0：失败
-        type: integer
-        format: int32
-      page:
-        type: object
-        properties:
-          totalCount:
-            description: 总记录数
-            type: integer
-            format: int32
-          pageSize:
-            description: 每页记录数
-            type: integer
-            format: int32
-          totalPage:
-            description: 总页数
-            type: integer
-            format: int32
-          currPage:
-            description: 当前页数
-            type: integer
-            format: int32
-          list:
-            type: array
-            items:
-              $ref: '#/definitions/SysUserEntity'
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/SysUserEntity'
+      meta:
+        $ref: '#/definitions/Meta'
+
   SysUserEntityEdit:
       type: object
       properties:
