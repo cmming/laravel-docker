@@ -1,5 +1,20 @@
 安装好 开发环境 
 
+扩展工具
+yum install perl gcc* make kernel kernel-devel -y
+
+VBoxLinuxAdditions.run
+
+磁盘映射
+
+        vi /etc/rc.local #开启
+        
+        sudo mount -t vboxsf uBuntuSharePath /pcshare
+        mount -t vboxsf laravel-docker /home/vagrant
+        
+        给文件夹授权
+        
+
 1. 进入工作区域安装 laravel
     
     项目初始化完成后，使用配置nginx的root
@@ -17,6 +32,7 @@
 
     ```
     #mysql 配置远程连接
+    docker-compose build --no-cache mysql
     docker-compose exec mysql bash // 进入bash
     mysql -uroot -proot // 进入mysql命令行
     
