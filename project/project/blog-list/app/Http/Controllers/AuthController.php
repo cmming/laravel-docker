@@ -15,7 +15,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['jwt.auth'], ['except' => ['login']]);
+//        $this->middleware(['jwt.auth'], ['except' => ['login','captcha.jpg']]);
 //        $this->middleware(['auth:api'], ['except' => ['login']]);
     }
 
@@ -24,11 +24,28 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
+
+
+        $validator = \Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+            'ckey' => 'required',
+            'captcha' => 'required|captcha_api:' . $request->input('ckey')
+        ],[
+            'captcha.required' => '验证码不能为空',
+            'captcha.captcha_api' => '请输入正确的验证码',
+        ]);
+
+        if ($validator->fails()) {
+            // 错误批量处理
+            return $this->errorBadRequest($validator);
+        }
+
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

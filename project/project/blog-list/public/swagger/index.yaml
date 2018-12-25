@@ -1,8 +1,8 @@
 swagger: '2.0'
 info:
-  description: laravel-template
+  description: laravel-docker
   version: 1.0.0
-  title: laravel-template
+  title: laravel-docker
 
 basePath: /api
 
@@ -46,21 +46,15 @@ paths:
             schema:
               $ref: '#/definitions/RegisterForm'
             required: true
-  /captcha.jpg:
+  /auth/captcha.jpg:
     get:
       tags:
         - 用户登录
       summary: 获取验证码
       produces:
-        - application/octet-stream
-      parameters:
-        - name: uuid
-          description: UUID
-          in: query
-          type: string
-          required: true
+        - application/json
   /auth/login:
-    put:
+    post:
       tags:
         - 用户登录
       summary: 用户登录
@@ -129,26 +123,7 @@ paths:
           description: 返回管理员列表
           schema:
             $ref: '#/definitions/SysUserEntityList'
-  /sys/user/info:
-    get:
-      tags:
-        - 管理员管理
-      summary: 当前管理员信息
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: 返回当前管理员信息
-          schema:
-            type: object
-            properties:
-              code:
-                description: 状态码 0：成功  非0：失败
-                type: integer
-                format: int32
-              user:
-                $ref: '#/definitions/SysUserEntity'
-  /sys/user/info/{userId}:
+  /user/info/{userId}:
     get:
       tags:
         - 管理员管理
@@ -173,8 +148,8 @@ paths:
                 format: int32
               user:
                 $ref: '#/definitions/SysUserEntity'
-  /sys/user/password:
-    post:
+  /user/password:
+    put:
       tags:
         - 管理员管理
       summary: 修改密码
@@ -192,7 +167,7 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /sys/user/save:
+  /user/save:
     post:
       tags:
         - 管理员管理
@@ -211,14 +186,19 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /sys/user/update:
-    post:
+  /user/update/{userid}:
+    put:
       tags:
         - 管理员管理
       summary: 修改管理员
       produces:
         - application/json
       parameters:
+        - name: userId
+          description: 用户ID
+          in: path
+          type: integer
+          required: true
         - name: body
           description: 管理员对象
           in: body
@@ -230,29 +210,26 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /sys/user/delete:
-    post:
+  /user/delete/{userid}:
+    delete:
       tags:
         - 管理员管理
       summary: 删除管理员
       produces:
         - application/json
       parameters:
-        - name: body
-          description: 用户ID列表
-          in: body
-          type: array
-          items:
-            type: integer
-            format: int64
-            default: 0
+        - name: userId
+          description: 用户ID
+          in: path
+          type: integer
           required: true
       responses:
         '200':
           schema:
             $ref: '#/definitions/R'
 
-  /sys/role/list:
+
+  /role:
     get:
       tags:
         - 角色管理
@@ -309,7 +286,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/SysRoleEntity'
-  /sys/role/info/{roleId}:
+  /role/{roleId}:
     get:
       tags:
         - 角色管理
@@ -334,7 +311,7 @@ paths:
                 format: int32
               role:
                 $ref: '#/definitions/SysRoleEntity'
-  /sys/role/save:
+  /role?save:
     post:
       tags:
         - 角色管理
@@ -353,14 +330,19 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /sys/role/update:
-    post:
+  /role/{roleId}?update:
+    put:
       tags:
         - 角色管理
       summary: 修改角色
       produces:
         - application/json
       parameters:
+        - name: roleId
+          description: 角色ID
+          in: path
+          type: integer
+          required: true
         - name: body
           description: 角色对象
           in: body
@@ -372,35 +354,54 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /sys/role/delete:
-    post:
+  /role/{roleId}?delete:
+    delete:
       tags:
         - 角色管理
       summary: 删除角色
       produces:
         - application/json
       parameters:
-        - name: body
-          description: 角色ID列表
-          in: body
-          type: array
-          items:
-            type: integer
-            format: int64
-            default: 0
-          required: true
+         - name: roleId
+           description: 角色ID
+           in: path
+           type: integer
+           required: true
       responses:
         '200':
           schema:
             $ref: '#/definitions/R'
 
-  /sys/menu/nav:
+  /menu:
     get:
       tags:
         - 菜单管理
       summary: 导航菜单列表
       produces:
         - application/json
+      parameters:
+              - name: page
+                description: 页码
+                in: query
+                type: integer
+                required: true
+              - name: limit
+                description: 每页条数
+                in: query
+                type: integer
+                required: true
+              - name: sidx
+                description: 排序字段
+                in: query
+                type: string
+              - name: order
+                description: 排序方式，如：asc、desc
+                in: query
+                type: string
+              - name: roleName
+                description: 角色名
+                in: query
+                type: string
       responses:
         '200':
           description: 返回导航菜单列表
@@ -421,44 +422,7 @@ paths:
                 type: array
                 items:
                   type: string
-  /sys/menu/list:
-    get:
-      tags:
-        - 菜单管理
-      summary: 菜单列表
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: 返回菜单列表
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/SysMenuEntity'
-  /sys/menu/select:
-    get:
-      tags:
-        - 菜单管理
-      summary: 选择菜单
-      description: 添加、修改菜单的时候，选择上级菜单接口
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: 返回菜单列表
-          schema:
-            type: object
-            properties:
-              code:
-                description: 状态码 0：成功  非0：失败
-                type: integer
-                format: int32
-              menuList:
-                description: 菜单列表
-                type: array
-                items:
-                  $ref: '#/definitions/SysMenuEntity'
-  /sys/menu/info/{menuId}:
+  /menu/{menuId}?info:
     get:
       tags:
         - 菜单管理
@@ -484,7 +448,7 @@ paths:
               menu:
                 description: 菜单信息
                 $ref: '#/definitions/SysMenuEntity'
-  /sys/menu/save:
+  /menu?save:
     post:
       tags:
         - 菜单管理
@@ -503,27 +467,32 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /sys/menu/update:
-    post:
+  /menu/{menuId}?update:
+    put:
       tags:
         - 菜单管理
       summary: 修改菜单
       produces:
         - application/json
       parameters:
-        - name: body
-          description: 菜单对象
-          in: body
-          type: string
-          schema:
+         - name: menuId
+           description: 菜单ID
+           in: path
+           type: integer
+           required: true
+         - name: body
+           description: 菜单对象
+           in: body
+           type: string
+           schema:
             $ref: '#/definitions/SysMenuEntityEdit'
-          required: true
+           required: true
       responses:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /sys/menu/delete/{menuId}:
-    post:
+  /menu/{menuId}?delete:
+    delete:
       tags:
         - 菜单管理
       summary: 删除菜单
@@ -539,6 +508,137 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
+
+  /api:
+    get:
+      tags:
+        - 接口管理
+      summary: 接口列表
+      produces:
+        - application/json
+      parameters:
+                    - name: page
+                      description: 页码
+                      in: query
+                      type: integer
+                      required: true
+                    - name: limit
+                      description: 每页条数
+                      in: query
+                      type: integer
+                      required: true
+                    - name: sidx
+                      description: 排序字段
+                      in: query
+                      type: string
+                    - name: order
+                      description: 排序方式，如：asc、desc
+                      in: query
+                      type: string
+                    - name: roleName
+                      description: 角色名
+                      in: query
+                      type: string
+      responses:
+        '200':
+          description: 接口列表
+          schema:
+            type: object
+            properties:
+              menuList:
+                description: 菜单列表
+                type: array
+                items:
+                  $ref: '#/definitions/SysMenuEntity'
+              permissions:
+                description: 权限列表
+                type: array
+                items:
+                  type: string
+  /api/{apiId}?info:
+    get:
+      tags:
+        - 接口管理
+      summary: 获取菜单信息
+      produces:
+        - application/json
+      parameters:
+        - name: apiId
+          description: 菜单ID
+          in: path
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: 返回菜单信息
+          schema:
+            type: object
+            properties:
+              code:
+                description: 状态码 0：成功  非0：失败
+                type: integer
+                format: int32
+  /api?save:
+    post:
+      tags:
+        - 接口管理
+      summary: 添加接口
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: 菜单对象
+          in: body
+          type: string
+          schema:
+            $ref: '#/definitions/SysApiEntityEdit'
+          required: true
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/R'
+  /api/{apiId}?update:
+    put:
+      tags:
+        - 接口管理
+      summary: 修改接口
+      produces:
+        - application/json
+      parameters:
+         - name: apiId
+           description: 菜单ID
+           in: path
+           type: integer
+           required: true
+         - name: body
+           description: 菜单对象
+           in: body
+           type: string
+           schema:
+            $ref: '#/definitions/SysApiEntityEdit'
+           required: true
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/R'
+  /api/{apiId}?delete:
+    delete:
+      tags:
+        - 接口管理
+      summary: 删除接口
+      produces:
+        - application/json
+      parameters:
+        - name: apiId
+          description: 菜单ID
+          in: path
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/R'
+
 
   /sys/log/list:
     get:
@@ -1145,6 +1245,12 @@ definitions:
       password:
         description: 密码
         type: string
+      ckey:
+        description: ckey
+        type: string
+      captcha:
+        description: 验证码
+        type: string
   PasswordForm:
     type: object
     properties:
@@ -1194,32 +1300,16 @@ definitions:
   SysUserEntityEdit:
       type: object
       properties:
-        userId:
-          description: 用户ID
-          type: integer
-          format: int64
-        username:
-          description: 用户名
-          type: string
         password:
           description: 密码
           type: string
         email:
           description: 邮箱
           type: string
-        mobile:
-          description: 手机号
+        name:
+          description: 用户名
           type: string
-        status:
-          description: 状态  0：禁用   1：正常
-          type: integer
-          format: int32
-        roleIdList:
-          description: 角色ID列表
-          type: array
-          items:
-            type: integer
-            format: int32
+
 
   SysRoleEntity:
     type: object
@@ -1285,18 +1375,12 @@ definitions:
         description: 角色ID
         type: integer
         format: int64
-      roleName:
+      name:
         description: 角色名称
         type: string
-      remark:
+      description:
         description: 备注
         type: string
-      menuIdList:
-        description: 菜单ID列表
-        type: array
-        items:
-          type: integer
-          format: int64
 
   SysMenuEntity:
     type: object
@@ -1339,35 +1423,59 @@ definitions:
   SysMenuEntityEdit:
     type: object
     properties:
-      menuId:
-        description: 菜单ID
-        type: integer
-        format: int64
-      name:
-        description: 菜单名称
-        type: string
-      parentId:
+      parent_id:
         description: 父菜单ID，一级菜单为0
         type: integer
         format: int64
-      url:
-        description: 菜单URL
+      show:
+        description: 是否显示
+        type: integer
+        format: int64
+      path:
+        description: 路径
         type: string
-      perms:
-        description: 授权标识
+      name:
+        description: 名称
         type: string
-      type:
-        description: 类型     0：目录   1：菜单   2：按钮
+      component:
+        description: 组件的路径
+        type: string
+      en_title:
+        description: 页面的标题 英文
+        type: integer
+        format: int32
+      zh_title:
+        description: 页面的标题 中文
         type: integer
         format: int32
       icon:
         description: 菜单图标
         type: string
-      orderNum:
+      no_cache:
+        description: 是否缓存
+        type: integer
+        format: int32
+      sort:
         description: 排序
         type: integer
         format: int32
 
+
+  SysApiEntityEdit:
+    type: object
+    properties:
+      url:
+        description: 接口的url
+        type: string
+      method:
+        description: 请求方式
+        type: string
+      uses:
+        description: 接口使用的方法
+        type: string
+      description:
+        description: 接口描述
+        type: string
   SysLogEntity:
     type: object
     properties:

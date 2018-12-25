@@ -17,7 +17,11 @@ class MailController extends Controller
         $this->mail = $mail;
     }
 
-    //
+    /**
+     * 注册时候发送验证码
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response|void
+     */
     public function sendMailToRegister(Request $request)
     {
         $validator = \Validator::make($request->input(), [
@@ -39,14 +43,23 @@ class MailController extends Controller
         return $this->response->created();
     }
 
+    /**
+     * 激活账号
+     */
     public function activeCount()
     {
     }
 
+    /**
+     * 发送重置密码的邮件
+     */
     public function sendMailToResetPwd()
     {
     }
 
+    /**
+     * 邮箱中的重置密码的请求
+     */
     public function ResetPwd()
     {
     }

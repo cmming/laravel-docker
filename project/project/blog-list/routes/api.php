@@ -23,11 +23,68 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers',
 ], function ($api) {
-    $api->group(['middleware' => ['api'], 'prefix' => 'auth',], function ($api) {
+
+    $api->group(['prefix' => 'auth'], function ($api) {
+        $api->get('captcha.jpg', 'User\IndexController@captcha');
         $api->post('login', 'AuthController@login')->name('login');
-        $api->post('logout', 'AuthController@logout');
         $api->post('refresh', 'AuthController@refresh');
-        $api->post('me', 'AuthController@me');
+    });
+
+    $api->group(['middleware' => ['api', 'jwt.auth']], function ($api) {
+        $api->group(['prefix' => 'auth'], function ($api) {
+            $api->post('logout', 'AuthController@logout');
+            $api->post('me', 'AuthController@me');
+        });
+
+        //管理用户
+        $api->group(['prefix' => 'user'], function ($api) {
+            //管理员列表
+            $api->get('list', 'User\IndexController@index');
+            //管理员信息
+            $api->get('info/{userid}', 'User\IndexController@show');
+            //添加用户
+            $api->post('save', 'User\IndexController@store');
+            //重置密码
+            $api->put('password', 'User\IndexController@ResetPwd');
+            //修改用户信息
+            $api->put('update/{userid}', 'User\IndexController@update');
+            //删除用户
+            $api->delete('delete/{userid}', 'User\IndexController@delete');
+
+            //测试redis 使用
+            $api->post('pushInstructions.do', 'User\IndexController@setInstructions');
+            $api->get('pullInstructions.do', 'User\IndexController@getInstructions');
+        });
+
+        //角色管理
+        $api->group(['prefix' => 'role'], function ($api) {
+            $api->get('', 'Role\IndexController@index');
+            $api->post('', 'Role\IndexController@store');
+            $api->get('/{roleId}', 'Role\IndexController@show');
+            $api->put('/{roleId}', 'Role\IndexController@update');
+            $api->delete('/{roleId}', 'Role\IndexController@delete');
+        });
+
+
+        //菜单管理
+        $api->group(['prefix' => 'menu'], function ($api) {
+            $api->get('', 'Menu\IndexController@index');
+            $api->post('', 'Menu\IndexController@store');
+            $api->get('/{menuId}', 'Menu\IndexController@show');
+            $api->put('/{menuId}', 'Menu\IndexController@update');
+            $api->delete('/{menuId}', 'Menu\IndexController@delete');
+        });
+
+        //接口管理
+
+        $api->group(['prefix' => 'api'], function ($api) {
+            $api->get('', 'Api\IndexController@index');
+            $api->post('', 'Api\IndexController@store');
+            $api->get('/{apiId}', 'Api\IndexController@show');
+            $api->put('/{apiId}', 'Api\IndexController@update');
+            $api->delete('/{apiId}', 'Api\IndexController@delete');
+        });
+
     });
     $api->group(['prefix' => 'user'], function ($api) {
         $api->post('register', 'User\RegisterController@register')->name('register');
@@ -44,25 +101,7 @@ $api->version('v1', [
         $api->post('ResetPwd', 'Tool\MailController@ResetPwd');
     });
 
-    //管理用户
-    $api->group(['prefix' => 'user'], function ($api) {
-        //管理员列表
-        $api->get('list', 'User\IndexController@index');
-        //管理员信息
-        $api->get('info/{userid}', 'User\IndexController@show');
-        //添加用户
-        $api->post('save', 'User\IndexController@store');
-        //重置密码
-        $api->put('password', 'User\IndexController@ResetPwd');
-        //修改用户信息
-        $api->put('update', 'User\IndexController@update');
-        //删除用户
-        $api->delete('delete', 'User\IndexController@delete');
 
-        //测试redis 使用
-        $api->post('pushInstructions.do', 'User\IndexController@setInstructions');
-        $api->get('pullInstructions.do', 'User\IndexController@getInstructions');
-    });
 });
 
 

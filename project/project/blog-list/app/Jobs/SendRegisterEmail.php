@@ -48,7 +48,7 @@ class SendRegisterEmail implements ShouldQueue
         Mail::create(['email' => $this->email, 'code' => $this->code, 'send_type' => 1]);
 
 
-        \Log::info('[注册验证码]:' . $this->email . '验证码为：' . $this->code);
+        \Log::info('[注册验证码]:' . $this->email . '验证码为：' . $this->code.'有效取为30分钟');
         \Mail::send('mail.emailCode', $code, function ($message) use ($email) {
             $message->from('13037125104@163.com', '陈明');
             $message->subject('注册验证码');

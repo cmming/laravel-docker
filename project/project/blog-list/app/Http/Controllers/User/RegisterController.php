@@ -15,7 +15,8 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validator = \Validator::make($request->input(), [
-            'email' => 'required|email|unique:users',
+//            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,email',
             'name' => 'required|string',
             'password' => 'required',
             //判断 code 是否存在于 邮箱验证表中
