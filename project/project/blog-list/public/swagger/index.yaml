@@ -640,7 +640,7 @@ paths:
             $ref: '#/definitions/R'
 
 
-  /sys/log/list:
+  /log:
     get:
       tags:
         - 系统日志

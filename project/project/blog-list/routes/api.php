@@ -25,80 +25,88 @@ $api->version('v1', [
 ], function ($api) {
 
     $api->group(['prefix' => 'auth'], function ($api) {
-        $api->get('captcha.jpg', 'User\IndexController@captcha');
-        $api->post('login', 'AuthController@login')->name('login');
-        $api->post('refresh', 'AuthController@refresh');
+        $api->get('captcha.jpg', ['uses' => 'User\IndexController@captcha']);
+        $api->post('login', ['uses' => 'AuthController@login'])->name('login');
+        $api->post('refresh', ['uses' => 'AuthController@refresh']);
     });
 
-    $api->group(['middleware' => ['api', 'jwt.auth']], function ($api) {
+    $api->group(['middleware' => ['api', 'jwt.auth','operationLog']], function ($api) {
         $api->group(['prefix' => 'auth'], function ($api) {
-            $api->post('logout', 'AuthController@logout');
-            $api->post('me', 'AuthController@me');
+            $api->post('logout', ['uses' => 'AuthController@logout']);
+            $api->post('me', ['uses' => 'AuthController@me']);
         });
 
         //管理用户
         $api->group(['prefix' => 'user'], function ($api) {
             //管理员列表
-            $api->get('list', 'User\IndexController@index');
+            $api->get('list', ['uses' => 'User\IndexController@index']);
             //管理员信息
-            $api->get('info/{userid}', 'User\IndexController@show');
+            $api->get('info/{userid}', ['uses' => 'User\IndexController@show']);
             //添加用户
-            $api->post('save', 'User\IndexController@store');
+            $api->post('save', ['uses' => 'User\IndexController@store']);
             //重置密码
-            $api->put('password', 'User\IndexController@ResetPwd');
+            $api->put('password', ['uses' => 'User\IndexController@ResetPwd']);
             //修改用户信息
-            $api->put('update/{userid}', 'User\IndexController@update');
+            $api->put('update/{userid}', ['uses' => 'User\IndexController@update']);
             //删除用户
-            $api->delete('delete/{userid}', 'User\IndexController@delete');
+            $api->delete('delete/{userid}', ['uses' => 'User\IndexController@delete']);
 
             //测试redis 使用
-            $api->post('pushInstructions.do', 'User\IndexController@setInstructions');
-            $api->get('pullInstructions.do', 'User\IndexController@getInstructions');
+            $api->post('pushInstructions.do', ['uses' => 'User\IndexController@setInstructions']);
+            $api->get('pullInstructions.do', ['uses' => 'User\IndexController@getInstructions']);
         });
 
         //角色管理
         $api->group(['prefix' => 'role'], function ($api) {
-            $api->get('', 'Role\IndexController@index');
-            $api->post('', 'Role\IndexController@store');
-            $api->get('/{roleId}', 'Role\IndexController@show');
-            $api->put('/{roleId}', 'Role\IndexController@update');
-            $api->delete('/{roleId}', 'Role\IndexController@delete');
+            $api->get('', ['uses' => 'Role\IndexController@index']);
+            $api->post('', ['uses' => 'Role\IndexController@store']);
+            $api->get('/{roleId}', ['uses' => 'Role\IndexController@show']);
+            $api->put('/{roleId}', ['uses' => 'Role\IndexController@update']);
+            $api->delete('/{roleId}', ['uses' => 'Role\IndexController@delete']);
         });
 
 
         //菜单管理
         $api->group(['prefix' => 'menu'], function ($api) {
-            $api->get('', 'Menu\IndexController@index');
-            $api->post('', 'Menu\IndexController@store');
-            $api->get('/{menuId}', 'Menu\IndexController@show');
-            $api->put('/{menuId}', 'Menu\IndexController@update');
-            $api->delete('/{menuId}', 'Menu\IndexController@delete');
+            $api->get('', ['uses' => 'Menu\IndexController@index']);
+            $api->post('', ['uses' => 'Menu\IndexController@store']);
+            $api->get('/{menuId}', ['uses' => 'Menu\IndexController@show']);
+            $api->put('/{menuId}', ['uses' => 'Menu\IndexController@update']);
+            $api->delete('/{menuId}', ['uses' => 'Menu\IndexController@delete']);
         });
 
         //接口管理
 
         $api->group(['prefix' => 'api'], function ($api) {
-            $api->get('', 'Api\IndexController@index');
-            $api->post('', 'Api\IndexController@store');
-            $api->get('/{apiId}', 'Api\IndexController@show');
-            $api->put('/{apiId}', 'Api\IndexController@update');
-            $api->delete('/{apiId}', 'Api\IndexController@delete');
+            $api->get('', ['uses' => 'Api\IndexController@index']);
+            $api->post('', ['uses' => 'Api\IndexController@store']);
+            $api->get('/{apiId}', ['uses' => 'Api\IndexController@show']);
+            $api->put('/{apiId}', ['uses' => 'Api\IndexController@update']);
+            $api->delete('/{apiId}', ['uses' => 'Api\IndexController@delete']);
+        });
+
+        //日志管理
+        $api->group(['prefix' => 'log'], function ($api) {
+            $api->get('', ['uses' => 'Log\IndexController@index']);
         });
 
     });
     $api->group(['prefix' => 'user'], function ($api) {
-        $api->post('register', 'User\RegisterController@register')->name('register');
+        $api->post('register', ['uses' => 'User\RegisterController@register'])->name('register');
     });
     //邮箱服务
     $api->group(['prefix' => 'mail'], function ($api) {
         //发送 注册 邮件 验证码
-        $api->get('sendMailToRegister', 'Tool\MailController@sendMailToRegister');
+        $api->get('sendMailToRegister', ['uses' => 'Tool\MailController@sendMailToRegister']);
         //激活账号
-        $api->post('activeCount', 'Tool\MailController@activeCount');
+        $api->post('activeCount', ['uses' => 'Tool\MailController@activeCount']);
         //发送邮件重置密码
-        $api->post('sendMailToResetPwd', 'Tool\MailController@sendMailToResetPwd');
+        $api->post('sendMailToResetPwd', ['uses' => 'Tool\MailController@sendMailToResetPwd']);
         //重置密码
-        $api->post('ResetPwd', 'Tool\MailController@ResetPwd');
+        $api->post('ResetPwd', [
+            'uses' => 'Tool\MailController@ResetPwd',
+            'des' => '保存前端路由',
+        ]);
     });
 
 
