@@ -90,6 +90,11 @@ $api->version('v1', [
             $api->get('', ['uses' => 'Log\IndexController@index']);
         });
 
+        //文件管理
+        $api->group(['prefix' => 'file'], function ($api) {
+            $api->get('/curentFile', ['uses' => 'File\IndexController@index']);
+        });
+
     });
     $api->group(['prefix' => 'user'], function ($api) {
         $api->post('register', ['uses' => 'User\RegisterController@register'])->name('register');

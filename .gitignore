@@ -39,3 +39,5 @@ swagger-ui-3.19.5
 /project/project/blog-list/public/swagger-ui-3.19.5/.gitignore
 /.vagrant
 .idea
+plugin
+iso
