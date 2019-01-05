@@ -24,7 +24,7 @@ VBoxLinuxAdditions.run
     使用 phpmyadmin 管理mysql
     docker-compose up -d phpmyadmin
     
-    ip:8080
+    ip:8080 
     
     user:default
     
