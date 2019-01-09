@@ -6,3 +6,14 @@
  chmod -R 777 /home/vagrant/project/project/blog-list/storage/
  
  
+ 开启elasticsearch 
+ 出现内存权限不够
+ sudo sysctl -w vm.max_map_count=262144
+ 
+ 上述方法修改之后，如果重启虚拟机将失效，所以：
+ 
+ 解决办法：
+ 
+ 在   /etc/sysctl.conf文件最后添加一行
+ 
+ vm.max_map_count=262144
