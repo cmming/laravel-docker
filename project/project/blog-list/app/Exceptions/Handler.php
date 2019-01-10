@@ -37,6 +37,16 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+//        try {
+//            $logs = ElasticSearchClient::getLogs();
+//            // 需要判断是否有日志
+//            if (count($logs) > 0) {
+//                dispatch(new JElasticSearchLog($logs));
+//            }
+//        } catch (\Exception $e) {
+//            Log::error($e->getMessage());
+//        }
+
         parent::report($exception);
     }
 

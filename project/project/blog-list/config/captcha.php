@@ -2,6 +2,7 @@
 
 return [
 
+//    'characters' => '12中文你好',
     'characters' => '2346789abcdefghjmnpqrtuxyzABCDEFGHJMNPQRTUXYZ',
 
     'default'   => [

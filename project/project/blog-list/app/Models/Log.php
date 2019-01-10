@@ -11,7 +11,7 @@ class Log extends Model
     // 定义索引里面的type
     public function searchableAs()
     {
-        return 'log';
+        return 'logs';
     }
 
 // 定义有哪些字段需要搜索

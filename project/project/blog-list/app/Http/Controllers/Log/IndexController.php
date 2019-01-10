@@ -21,7 +21,9 @@ class IndexController extends Controller
 
     public function index()
     {
-        $logs = $this->log->paginate();
+        //日志搜索
+        $query=request('key');
+        $logs = $this->log->search($query)->paginate();
 
         return $this->response->paginator($logs, new LogTransformer());
     }

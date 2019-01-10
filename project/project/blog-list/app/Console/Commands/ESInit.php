@@ -66,7 +66,7 @@ class ESInit extends Command
                                     'match_mapping_type' => 'string', // 限制匹配的字段类型，只能是 string 类型
                                     'mapping' => [ // 字段的处理方式
                                         'type' => 'text', // 字段类型限定为 string
-                                        'analyzer' => 'ik_smart', // 字段采用的分析器名，默认值为 standard 分析器
+                                        'analyzer' => 'standard', // 字段采用的分析器名，默认值为 standard 分析器  ik_smart
                                         'fields' => [
                                             'raw' => [
                                                 'type' => 'keyword',
