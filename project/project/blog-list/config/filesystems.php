@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'sftp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -62,6 +62,23 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
+        ],
+
+        'sftp' => [
+            'driver' => 'sftp',
+            'host' => '192.168.30.136',
+            'username' => 'root',
+            'password' => '123456',
+
+            // Settings for SSH key based authentication...
+            // 'privateKey' => '/path/to/privateKey',
+            // 'password' => 'encryption-password',
+
+            // Optional SFTP Settings...
+            // 'port' => 22,
+            'root' => '',
+//            'root1' => 'C:\/Program Files (x86)\/EasyPHP-12.1\/www',
+            // 'timeout' => 30,
         ],
 
     ],

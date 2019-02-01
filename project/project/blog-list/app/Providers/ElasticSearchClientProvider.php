@@ -11,7 +11,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Log;
 use App\Contracts\Foundation\ElasticSearchLogHandler;
-use Monolog\Logger;
 
 class ElasticSearchClientProvider extends ServiceProvider
 {

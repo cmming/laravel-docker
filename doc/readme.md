@@ -12,6 +12,8 @@ VBoxLinuxAdditions.run
         sudo mount -t vboxsf uBuntuSharePath /pcshare
         mount -t vboxsf laravel-docker /home/vagrant
         
+        mount -t vboxsf nextcloud /home/vesystemcloud
+        
         给文件夹授权
         
 
