@@ -12,6 +12,8 @@ sudo groupadd docker
 sudo usermod -aG docker vagrant
 sudo systemctl start docker
 
+systemctl enable docker
+
 rm -rf get-docker.sh
 
 #install docker-compose

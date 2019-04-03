@@ -7,6 +7,7 @@ use Laravel\Scout\Searchable;
 
 class Log extends Model
 {
+//    php artisan scout:import "\App\Models\Log"
     use Searchable;
     // 定义索引里面的type
     public function searchableAs()
