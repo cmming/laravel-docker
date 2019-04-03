@@ -5,6 +5,9 @@
  
  chmod -R 777 /home/vagrant/project/project/blog-list/storage/
  
+ //修改创建文件的默认选线
+ umask 000
+ 
  
  开启elasticsearch 
  出现内存权限不够
