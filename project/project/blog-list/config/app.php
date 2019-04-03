@@ -91,7 +91,8 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+//    'fallback_locale' => 'en',
+    'fallback_locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +169,7 @@ return [
         ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
 
         App\Providers\ElasticSearchClientProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
 
     ],
 

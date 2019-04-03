@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
         'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
         'operationLog' => \App\Http\Middleware\OperationLog::class,
+        'lang' =>\App\Http\Middleware\Lang::class,
     ];
 }
