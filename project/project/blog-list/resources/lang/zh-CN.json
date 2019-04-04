@@ -44,5 +44,7 @@
   "You are receiving this email because we received a password reset request for your account.": "您收到此电子邮件是因为我们收到了您帐户的密码重设请求。",
   "Whoops!": "哎呦！",
   "Whoops, something went wrong on our servers.": "哎呀，我们的服务器出了问题。",
-  "Create Error": "创建数据失败!"
+  "Create Error": "创建数据失败!",
+  "Update error": "创建更新失败!",
+  "Delete error": "删除失败!"
 }

@@ -19,8 +19,8 @@ class CreateTermicalOrders extends Migration
             $table->date('date')->comment('预约日期');
             $table->time('start_time')->comment('开始时间');
             $table->time('end_time')->comment('结束时间');
-            $table->integer('btime')->comment('开始时间的时间戳 用于资源可用搜索');
-            $table->integer('etime')->comment('结束时间的时间戳 用于资源可用搜索');
+            $table->date('btime')->comment('开始时间的时间戳 用于资源可用搜索');
+            $table->date('etime')->comment('结束时间的时间戳 用于资源可用搜索');
             $table->timestamps();
         });
     }
