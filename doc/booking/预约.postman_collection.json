@@ -17,7 +17,34 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "http://192.168.50.58:81/api/booking/termicals?date=2019-04-05&start_time=12:00:00&end_time=13:00:00",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"termicals"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2019-04-05"
+								},
+								{
+									"key": "start_time",
+									"value": "12:00:00"
+								},
+								{
+									"key": "end_time",
+									"value": "13:00:00"
+								}
+							]
 						}
 					},
 					"response": []
@@ -29,7 +56,26 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "http://192.168.50.58:81/api/booking/termicals?name=1号机器",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"termicals"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "1号机器"
+								}
+							]
 						}
 					},
 					"response": []
@@ -41,7 +87,31 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "http://192.168.50.58:81/api/booking/termicals/1?name=2号机器 修改测试&state=0",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"termicals",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "2号机器 修改测试"
+								},
+								{
+									"key": "state",
+									"value": "0"
+								}
+							]
 						}
 					},
 					"response": []
@@ -49,11 +119,25 @@
 				{
 					"name": "删除",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "http://192.168.50.58:81/api/booking/termicals/1",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"termicals",
+								"1"
+							]
 						}
 					},
 					"response": []
@@ -71,19 +155,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "添加",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://192.168.50.58:81/api/booking/times?start_time=9:00&end_time=21:00&time=1:00&date_length=7&start_date=20190305&end_date=20190405",
+							"raw": "http://192.168.50.58:81/api/booking/times",
 							"protocol": "http",
 							"host": [
 								"192",
@@ -96,41 +168,15 @@
 								"api",
 								"booking",
 								"times"
-							],
-							"query": [
-								{
-									"key": "start_time",
-									"value": "9:00"
-								},
-								{
-									"key": "end_time",
-									"value": "21:00"
-								},
-								{
-									"key": "time",
-									"value": "1:00"
-								},
-								{
-									"key": "date_length",
-									"value": "7"
-								},
-								{
-									"key": "start_date",
-									"value": "20190305"
-								},
-								{
-									"key": "end_date",
-									"value": "20190405"
-								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "更新",
+					"name": "添加",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {},
 						"url": {
@@ -179,13 +225,84 @@
 					"response": []
 				},
 				{
-					"name": "删除",
+					"name": "更新",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "http://192.168.50.58:81/api/booking/times/1?start_time=09:00&end_time=21:00&time=01:00&date_length=9&start_date=2019-03-05&end_date=2019-04-05",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"times",
+								"1"
+							],
+							"query": [
+								{
+									"key": "start_time",
+									"value": "09:00"
+								},
+								{
+									"key": "end_time",
+									"value": "21:00"
+								},
+								{
+									"key": "time",
+									"value": "01:00"
+								},
+								{
+									"key": "date_length",
+									"value": "9"
+								},
+								{
+									"key": "start_date",
+									"value": "2019-03-05"
+								},
+								{
+									"key": "end_date",
+									"value": "2019-04-05"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://192.168.50.58:81/api/booking/times/1",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"times",
+								"1"
+							]
 						}
 					},
 					"response": []
@@ -203,7 +320,20 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "http://192.168.50.58:81/api/booking/termicalOrders",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"termicalOrders"
+							]
 						}
 					},
 					"response": []
@@ -211,11 +341,42 @@
 				{
 					"name": "生成订单",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "http://192.168.50.58:81/api/booking/termicalOrders?termical_id=1&date=2019-04-05&start_time=12:00&end_time=20:00",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"termicalOrders"
+							],
+							"query": [
+								{
+									"key": "termical_id",
+									"value": "1"
+								},
+								{
+									"key": "date",
+									"value": "2019-04-05"
+								},
+								{
+									"key": "start_time",
+									"value": "12:00"
+								},
+								{
+									"key": "end_time",
+									"value": "20:00"
+								}
+							]
 						}
 					},
 					"response": []
@@ -223,11 +384,47 @@
 				{
 					"name": "修改订单",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "http://192.168.50.58:81/api/booking/termicalOrders/1?termical_id=1&date=2019-04-05&start_time=08:00&end_time=11:00&state=2",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"termicalOrders",
+								"1"
+							],
+							"query": [
+								{
+									"key": "termical_id",
+									"value": "1"
+								},
+								{
+									"key": "date",
+									"value": "2019-04-05"
+								},
+								{
+									"key": "start_time",
+									"value": "08:00"
+								},
+								{
+									"key": "end_time",
+									"value": "11:00"
+								},
+								{
+									"key": "state",
+									"value": "2"
+								}
+							]
 						}
 					},
 					"response": []
@@ -235,16 +432,59 @@
 				{
 					"name": "删除",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": ""
+							"raw": "http://192.168.50.58:81/api/booking/termicalOrders/1",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"termicalOrders",
+								"1"
+							]
 						}
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "http://192.168.50.58:81/api/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjUwLjU4OjgxXC9hcGlcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNTU0Mjg1MjgwLCJleHAiOjE1NTQyODg4ODAsIm5iZiI6MTU1NDI4NTI4MCwianRpIjoiTjVwYjNEZ0JJbmVScTRtNSIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CAvHftBdOJeHeTpywC5fuIKczx09fERvZ8rDI3ydXWM"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://192.168.50.58:81/api/",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"50",
+						"58"
+					],
+					"port": "81",
+					"path": [
+						"api",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
