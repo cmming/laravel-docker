@@ -1,364 +1,260 @@
 {
-	"id": "523913f5-5561-4adc-bd66-2498a8465daa",
-	"name": "预约",
-	"description": "预约",
+	"info": {
+		"_postman_id": "523913f5-5561-4adc-bd66-2498a8465daa",
+		"name": "预约",
+		"description": "预约",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "资源",
+			"description": "",
+			"item": [
+				{
+					"name": "获取列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "保存",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "时间",
+			"description": "",
+			"item": [
+				{
+					"name": "列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://192.168.50.58:81/api/booking/times?start_time=9:00&end_time=21:00&time=1:00&date_length=7&start_date=20190305&end_date=20190405",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"times"
+							],
+							"query": [
+								{
+									"key": "start_time",
+									"value": "9:00"
+								},
+								{
+									"key": "end_time",
+									"value": "21:00"
+								},
+								{
+									"key": "time",
+									"value": "1:00"
+								},
+								{
+									"key": "date_length",
+									"value": "7"
+								},
+								{
+									"key": "start_date",
+									"value": "20190305"
+								},
+								{
+									"key": "end_date",
+									"value": "20190405"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://192.168.50.58:81/api/booking/times?start_time=09:00&end_time=21:00&time=01:00&date_length=7&start_date=2019-03-05&end_date=2019-04-05",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"50",
+								"58"
+							],
+							"port": "81",
+							"path": [
+								"api",
+								"booking",
+								"times"
+							],
+							"query": [
+								{
+									"key": "start_time",
+									"value": "09:00"
+								},
+								{
+									"key": "end_time",
+									"value": "21:00"
+								},
+								{
+									"key": "time",
+									"value": "01:00"
+								},
+								{
+									"key": "date_length",
+									"value": "7"
+								},
+								{
+									"key": "start_date",
+									"value": "2019-03-05"
+								},
+								{
+									"key": "end_date",
+									"value": "2019-04-05"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "订单表",
+			"description": "",
+			"item": [
+				{
+					"name": "列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "生成订单",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改订单",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
 	"auth": {
 		"type": "bearer",
 		"bearer": [
 			{
 				"key": "token",
-				"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjUwLjU4XC9hcGlcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNTQ1Mjk5MjY3LCJleHAiOjE1NDUzMDI4NjcsIm5iZiI6MTU0NTI5OTI2NywianRpIjoiRXZQQUt4YWV2cFlocXJzMyIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.BRtCUpdvGXSgA2764vXcY8r1ITp1Tj5ZkeHAJNt8twM"
+				"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjUwLjU4XC9hcGlcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNTQ1Mjk5MjY3LCJleHAiOjE1NDUzMDI4NjcsIm5iZiI6MTU0NTI5OTI2NywianRpIjoiRXZQQUt4YWV2cFlocXJzMyIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.BRtCUpdvGXSgA2764vXcY8r1ITp1Tj5ZkeHAJNt8twM",
+				"type": "string"
 			}
 		]
-	},
-	"events": null,
-	"variables": [],
-	"order": [],
-	"folders_order": [
-		"79783a56-5d4f-42fa-9ea8-766391400055",
-		"eaffde32-87ee-4cf3-8127-f3fe430cf28b",
-		"beceb9ae-aa98-47c3-b3df-35c89ad1cdcf"
-	],
-	"folders": [
-		{
-			"id": "eaffde32-87ee-4cf3-8127-f3fe430cf28b",
-			"name": "时间",
-			"description": "",
-			"auth": null,
-			"events": null,
-			"collection": "523913f5-5561-4adc-bd66-2498a8465daa",
-			"folder": null,
-			"order": [
-				"87cbdb50-ee0c-49c5-9809-b91c28103b4a",
-				"3e62cdbf-2b34-4b66-9013-c0cb5fc43558",
-				"ce1db5b7-6ebe-4ece-a297-a4e7da39ec48",
-				"305aecbe-8c12-4e01-8b4b-d12435847ab8"
-			],
-			"folders_order": []
-		},
-		{
-			"id": "beceb9ae-aa98-47c3-b3df-35c89ad1cdcf",
-			"name": "订单表",
-			"description": "",
-			"auth": null,
-			"events": null,
-			"collection": "523913f5-5561-4adc-bd66-2498a8465daa",
-			"folder": null,
-			"order": [
-				"6ee2d60b-4e8e-4a6e-8110-bf57b7eb0af8",
-				"d9e59bed-26f9-439c-b159-c27515244cb6",
-				"b00e7c68-f6b8-462a-8aaa-fb8b988badf0",
-				"3c8179d0-7e0e-45a0-97ea-59b318919819"
-			],
-			"folders_order": []
-		},
-		{
-			"id": "79783a56-5d4f-42fa-9ea8-766391400055",
-			"name": "资源",
-			"description": "",
-			"auth": null,
-			"events": null,
-			"collection": "523913f5-5561-4adc-bd66-2498a8465daa",
-			"folder": null,
-			"order": [
-				"4efd39b6-3ab7-4077-a14d-80c25b6cf17a",
-				"6339f094-f9c5-4c5b-9fa6-fdbaf6fb55cd",
-				"8d8082ca-7a34-435a-9d66-0bad67101dd0",
-				"cacec3c5-e027-4e3f-8b60-b90993afb7ca"
-			],
-			"folders_order": []
-		}
-	],
-	"requests": [
-		{
-			"id": "305aecbe-8c12-4e01-8b4b-d12435847ab8",
-			"name": "删除",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "GET",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "eaffde32-87ee-4cf3-8127-f3fe430cf28b",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "3c8179d0-7e0e-45a0-97ea-59b318919819",
-			"name": "删除",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "GET",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "beceb9ae-aa98-47c3-b3df-35c89ad1cdcf",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "3e62cdbf-2b34-4b66-9013-c0cb5fc43558",
-			"name": "添加",
-			"url": "http://192.168.50.58:81/api/booking/times?start_time=9:00&end_time=21:00&time=1:00&date_length=7&start_date=20190305&end_date=20190405",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "POST",
-			"pathVariableData": [],
-			"queryParams": [
-				{
-					"key": "start_time",
-					"value": "9:00",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "end_time",
-					"value": "21:00",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "time",
-					"value": "1:00",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "date_length",
-					"value": "7",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "start_date",
-					"value": "20190305",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "end_date",
-					"value": "20190405",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"auth": null,
-			"events": [],
-			"folder": "eaffde32-87ee-4cf3-8127-f3fe430cf28b",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "4efd39b6-3ab7-4077-a14d-80c25b6cf17a",
-			"name": "获取列表",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "GET",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "79783a56-5d4f-42fa-9ea8-766391400055",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "6339f094-f9c5-4c5b-9fa6-fdbaf6fb55cd",
-			"name": "保存",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "POST",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "79783a56-5d4f-42fa-9ea8-766391400055",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "6ee2d60b-4e8e-4a6e-8110-bf57b7eb0af8",
-			"name": "列表",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "GET",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "beceb9ae-aa98-47c3-b3df-35c89ad1cdcf",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "87cbdb50-ee0c-49c5-9809-b91c28103b4a",
-			"name": "列表",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "GET",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "eaffde32-87ee-4cf3-8127-f3fe430cf28b",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "8d8082ca-7a34-435a-9d66-0bad67101dd0",
-			"name": "更新",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "PUT",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "79783a56-5d4f-42fa-9ea8-766391400055",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "b00e7c68-f6b8-462a-8aaa-fb8b988badf0",
-			"name": "修改订单",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "GET",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "beceb9ae-aa98-47c3-b3df-35c89ad1cdcf",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "cacec3c5-e027-4e3f-8b60-b90993afb7ca",
-			"name": "删除",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "GET",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "79783a56-5d4f-42fa-9ea8-766391400055",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "ce1db5b7-6ebe-4ece-a297-a4e7da39ec48",
-			"name": "更新",
-			"url": "http://192.168.50.58:81/api/booking/times?start_time=09:00&end_time=21:00&time=01:00&date_length=7&start_date=2019-03-05&end_date=2019-04-05",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "PUT",
-			"pathVariableData": [],
-			"queryParams": [
-				{
-					"key": "start_time",
-					"value": "09:00",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "end_time",
-					"value": "21:00",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "time",
-					"value": "01:00",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "date_length",
-					"value": "7",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "start_date",
-					"value": "2019-03-05",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "end_date",
-					"value": "2019-04-05",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"auth": null,
-			"events": [],
-			"folder": "eaffde32-87ee-4cf3-8127-f3fe430cf28b",
-			"headers": "",
-			"pathVariables": {}
-		},
-		{
-			"id": "d9e59bed-26f9-439c-b159-c27515244cb6",
-			"name": "生成订单",
-			"url": "",
-			"description": "",
-			"data": null,
-			"dataMode": "params",
-			"headerData": [],
-			"method": "GET",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": "beceb9ae-aa98-47c3-b3df-35c89ad1cdcf",
-			"headers": "",
-			"pathVariables": {}
-		}
-	]
+	}
 }
