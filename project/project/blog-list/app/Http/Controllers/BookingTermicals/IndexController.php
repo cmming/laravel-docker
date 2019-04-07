@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BookingTermicals;
 use App\Models\BookingTermicals;
 use App\Models\BookingTermicalOrders;
 use App\Transformers\BookingTermicalsTransformer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,9 +27,9 @@ class IndexController extends Controller
         //1.搜索不可用的机器
         //获取参数的结束时间 大于表中的开始时间
         $validator = \Validator::make(request()->all(), [
-            'date' => 'required|date_format:"Y-m-d"',
-            'start_time' => 'required|date_format:"H:i:s"',
-            'end_time' => 'required|date_format:"H:i:s"',
+            'date' => 'date_format:"Y-m-d"',
+            'start_time' => 'date_format:"H:i"',
+            'end_time' => 'date_format:"H:i"',
         ]);
         if ($validator->fails()) {
             return $this->errorBadRequest($validator);
@@ -36,15 +37,21 @@ class IndexController extends Controller
         //凭借开始时间和结束时间
         $btime = $request->input('date') . ' ' . $request->input('start_time');
         $etime = $request->input('date') . ' ' . $request->input('end_time');
+        $btime = Carbon::parse($btime)->addSecond()->toDateTimeString();
+        $etime = Carbon::parse($etime)->subSecond()->toDateTimeString();
 //        dd($btime,$etime);
-        // 添加时间搜索条件
-        $result = $this->bookingTermicalOrders->orWhereBetween('start_time',[$btime,$etime])->orWhereBetween('end_time',[$btime,$etime])->get();
+        // 添加时间搜索条件  开始时间加一秒 结束时间减一秒
+        $result = $this->bookingTermicalOrders->WhereBetween('btime',[$btime,$etime])->orWhereBetween('etime',[$btime,$etime])->get(['termical_id']);
+
+        $result = array_column($result->toArray(),'termical_id');
+
+        $data = $this->bookingTermical->whereNotIn('id',$result)->paginate();
 //        dd($result);
-        return $this->response->array($result->toArray());
-        $bookingTermicals = $this->bookingTermical->paginate();
+//        return $this->response->array($result->toArray());
+//        $bookingTermicals = $this->bookingTermical->paginate();
 
 
-        return $this->response->paginator($bookingTermicals, new BookingTermicalsTransformer());
+        return $this->response->paginator($data, new BookingTermicalsTransformer());
     }
 
 
@@ -112,5 +119,17 @@ class IndexController extends Controller
         } else {
             return $this->deleteError();
         }
+    }
+
+    public function show($id){
+        $validator = \Validator::make(['id' => $id], [
+            'id' => 'required|exists:booking_termicals,id',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator);
+        }
+        $bookingTermical = $this->bookingTermical->find($id);
+        return $this->response->item($bookingTermical, new BookingTermicalsTransformer());
     }
 }

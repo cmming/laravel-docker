@@ -24,6 +24,13 @@ class IndexController extends Controller
         return $this->response->paginator($bookingTermicalOrders, new BookingTermicalOrdersTransformer());
     }
 
+    public function getOnlineTermicalOrders(){
+
+        $bookingTermicalOrders = $this->bookingTermicalOrders->where('state','=',2)->paginate();
+
+        return $this->response->paginator($bookingTermicalOrders, new BookingTermicalOrdersTransformer());
+    }
+
     public function store(Request $request)
     {
         $validator = \Validator::make(request()->all(), [
@@ -103,5 +110,17 @@ class IndexController extends Controller
         } else {
             return $this->deleteError();
         }
+    }
+
+    public function show($id){
+        $validator = \Validator::make(['id' => $id], [
+            'id' => 'required|exists:booking_termical_orders,id',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator);
+        }
+        $bookingTermicalOrder = $this->bookingTermicalOrders->find($id);
+        return $this->response->item($bookingTermicalOrder, new BookingTermicalOrdersTransformer());
     }
 }

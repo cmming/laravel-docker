@@ -15,7 +15,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware(['jwt.auth'], ['except' => ['login','captcha.jpg']]);
+        $this->middleware(['jwt.auth'], ['except' => ['login','captcha.jpg']]);
 //        $this->middleware(['auth:api'], ['except' => ['login']]);
     }
 
@@ -28,14 +28,19 @@ class AuthController extends Controller
     {
 
 
+//        $validator = \Validator::make($request->all(), [
+//            'email' => 'required|email',
+//            'password' => 'required',
+//            'ckey' => 'required',
+//            'captcha' => 'required|captcha_api:' . $request->input('ckey')
+//        ],[
+//            'captcha.required' => '验证码不能为空',
+//            'captcha.captcha_api' => '请输入正确的验证码',
+//        ]);
+
         $validator = \Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required',
-            'ckey' => 'required',
-            'captcha' => 'required|captcha_api:' . $request->input('ckey')
-        ],[
-            'captcha.required' => '验证码不能为空',
-            'captcha.captcha_api' => '请输入正确的验证码',
+            'name' => 'required',
+            'password' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -43,7 +48,7 @@ class AuthController extends Controller
             return $this->errorBadRequest($validator);
         }
 
-        $credentials = request(['email', 'password']);
+        $credentials = request(['name', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -69,7 +74,8 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+//        auth()->logout();
+        auth('api')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }

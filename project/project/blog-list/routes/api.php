@@ -96,6 +96,38 @@ $api->version('v1', [
             $api->get('/curentFile', ['uses' => 'File\IndexController@index', 'description' => "获取指定文件路径的结构"]);
         });
 
+
+        //    预约服务
+        $api->group(['prefix'=>'booking'],function ($api){
+            //终端管理
+            $api->group(['prefix'=>'termicals'],function($api){
+                $api->get('', ['uses' => 'BookingTermicals\IndexController@index', 'description' => "获取终端列表"]);
+                $api->post('', ['uses' => 'BookingTermicals\IndexController@store', 'description' => "保存一个终端"]);
+                $api->get('/{termicalId}', ['uses' => 'BookingTermicals\IndexController@show', 'description' => "获取一个终端详情"]);
+                $api->put('/{termicalId}', ['uses' => 'BookingTermicals\IndexController@update', 'description' => "更新一个终端"]);
+                $api->delete('/{termicalId}', ['uses' => 'BookingTermicals\IndexController@delete', 'description' => "删除一个终端"]);
+            });
+
+            $api->group(['prefix'=>'times'],function($api){
+                $api->get('', ['uses' => 'BookingTimes\IndexController@index', 'description' => "获取时间配置列表"]);
+                $api->post('', ['uses' => 'BookingTimes\IndexController@store', 'description' => "保存一个时间配置"]);
+                $api->get('/getCurentTimeConfig', ['uses' => 'BookingTimes\IndexController@getCurentTimeConfig', 'description' => "获取当前时间配置详情"]);
+                $api->get('/{timeId}', ['uses' => 'BookingTimes\IndexController@show', 'description' => "获取一个时间配置详情"]);
+                $api->put('/{timeId}', ['uses' => 'BookingTimes\IndexController@update', 'description' => "更新一个时间配置"]);
+                $api->delete('/{timeId}', ['uses' => 'BookingTimes\IndexController@delete', 'description' => "删除一个时间配置"]);
+            });
+
+            $api->group(['prefix'=>'termicalOrders'],function($api){
+                $api->get('', ['uses' => 'BookingTermicalOrders\IndexController@index', 'description' => "获取预约订单列表"]);
+                $api->get('/online', ['uses' => 'BookingTermicalOrders\IndexController@getOnlineTermicalOrders', 'description' => "获取正在消费订单列表"]);
+                $api->post('', ['uses' => 'BookingTermicalOrders\IndexController@store', 'description' => "保存一个预约订单"]);
+                $api->get('/{termicalOrderId}', ['uses' => 'BookingTermicalOrders\IndexController@show', 'description' => "获取一个预约订单详情"]);
+                $api->put('/{termicalOrderId}', ['uses' => 'BookingTermicalOrders\IndexController@update', 'description' => "更新一个预约订单"]);
+                $api->delete('/{termicalOrderId}', ['uses' => 'BookingTermicalOrders\IndexController@delete', 'description' => "删除一个预约订单"]);
+            });
+
+        });
+
     });
     $api->group(['prefix' => 'user'], function ($api) {
         $api->post('register', ['uses' => 'User\RegisterController@register', 'description' => "用户注册"])->name('register');
@@ -114,34 +146,7 @@ $api->version('v1', [
             'des' => '保存前端路由',
         ]);
     });
-//    预约服务
-    $api->group(['prefix'=>'booking'],function ($api){
-        //终端管理
-        $api->group(['prefix'=>'termicals'],function($api){
-            $api->get('', ['uses' => 'BookingTermicals\IndexController@index', 'description' => "获取终端列表"]);
-            $api->post('', ['uses' => 'BookingTermicals\IndexController@store', 'description' => "保存一个终端"]);
-            $api->get('/{termicalId}', ['uses' => 'BookingTermicals\IndexController@show', 'description' => "获取一个终端详情"]);
-            $api->put('/{termicalId}', ['uses' => 'BookingTermicals\IndexController@update', 'description' => "更新一个终端"]);
-            $api->delete('/{termicalId}', ['uses' => 'BookingTermicals\IndexController@delete', 'description' => "删除一个终端"]);
-        });
 
-        $api->group(['prefix'=>'times'],function($api){
-            $api->get('', ['uses' => 'BookingTimes\IndexController@index', 'description' => "获取时间配置列表"]);
-            $api->post('', ['uses' => 'BookingTimes\IndexController@store', 'description' => "保存一个时间配置"]);
-            $api->get('/{timeId}', ['uses' => 'BookingTimes\IndexController@show', 'description' => "获取一个时间配置详情"]);
-            $api->put('/{timeId}', ['uses' => 'BookingTimes\IndexController@update', 'description' => "更新一个时间配置"]);
-            $api->delete('/{timeId}', ['uses' => 'BookingTimes\IndexController@delete', 'description' => "删除一个时间配置"]);
-        });
-
-        $api->group(['prefix'=>'termicalOrders'],function($api){
-            $api->get('', ['uses' => 'BookingTermicalOrders\IndexController@index', 'description' => "获取预约订单列表"]);
-            $api->post('', ['uses' => 'BookingTermicalOrders\IndexController@store', 'description' => "保存一个预约订单"]);
-            $api->get('/{termicalOrderId}', ['uses' => 'BookingTermicalOrders\IndexController@show', 'description' => "获取一个预约订单详情"]);
-            $api->put('/{termicalOrderId}', ['uses' => 'BookingTermicalOrders\IndexController@update', 'description' => "更新一个预约订单"]);
-            $api->delete('/{termicalOrderId}', ['uses' => 'BookingTermicalOrders\IndexController@delete', 'description' => "删除一个预约订单"]);
-        });
-
-    });
 
 
 });

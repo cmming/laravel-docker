@@ -21,7 +21,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        $users = $this->user->paginate(1);
+        $users = $this->user->paginate();
 
         return $this->response->paginator($users, new UserTransformer());
     }
@@ -90,8 +90,7 @@ class IndexController extends Controller
     {
         $validator = \Validator::make(request()->all()+ ['id' => $id], [
             'id' => 'required|exists:users,id',
-            'name' => 'required|string',
-            'password' => 'required',
+            'name' => 'required|string'
         ]);
         if ($validator->fails()) {
             return $this->errorBadRequest($validator);
@@ -99,7 +98,6 @@ class IndexController extends Controller
 
         $newUser = [
             'name' => $request->input('name'),
-            'password' => bcrypt($request->input('password'))
         ];
         $this->user->find($id)->update($newUser);
 
