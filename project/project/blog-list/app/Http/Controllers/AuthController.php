@@ -15,7 +15,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['jwt.auth'], ['except' => ['login','captcha.jpg']]);
+//        $this->middleware(['jwt.auth'], ['except' => ['login','captcha.jpg']]);
 //        $this->middleware(['auth:api'], ['except' => ['login']]);
     }
 
@@ -74,8 +74,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-//        auth()->logout();
-        auth('api')->logout();
+        auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }

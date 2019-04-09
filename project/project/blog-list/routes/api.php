@@ -29,11 +29,12 @@ $api->version('v1', [
         $api->get('captcha.jpg', ['uses' => 'User\IndexController@captcha', 'description' => "获取验证码"]);
         $api->post('login', ['uses' => 'AuthController@login', 'description' => "用户登陆"])->name('login');
         $api->post('refresh', ['uses' => 'AuthController@refresh', 'description' => "刷新token"]);
+        $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
     });
 
     $api->group(['middleware' => ['api', 'jwt.auth', 'operationLog']], function ($api) {
         $api->group(['prefix' => 'auth'], function ($api) {
-            $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
+//            $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
             $api->post('me', ['uses' => 'AuthController@me', 'description' => "获取自己信息"]);
         });
 
