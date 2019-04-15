@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\BookingTermicalOrders;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redis;
@@ -9,14 +10,17 @@ use Illuminate\Support\Facades\Redis;
 
 use App\User;
 use App\Transformers\UserTransformer;
+use App\Transformers\BookingTermicalOrdersTransformer;
 
 class IndexController extends Controller
 {
     private $user;
+    private $bookingTermicalOrders;
     //
-    public function __construct(User $user)
+    public function __construct(User $user,BookingTermicalOrders $bookingTermicalOrders)
     {
         $this->user = $user;
+        $this->bookingTermicalOrders = $bookingTermicalOrders;
     }
 
     public function index()
@@ -133,6 +137,18 @@ class IndexController extends Controller
     {
 //        return \Captcha::img('1111111111');
         return $this->response->array(app('captcha')->create('default', true));
+    }
+
+    /**
+     * 用户的预约订单
+     */
+    public function termicalOrders(){
+        //预加载多个关联 减少数据查询的次数
+//        dd( auth()->user()->id);
+        $userBookingTermicalOrders = $this->bookingTermicalOrders->where('user_id','=',auth()->user()->id)->with(['user','termical'])->paginate();
+//        dd($userBookingTermicalOrders);
+        return $this->response->paginator($userBookingTermicalOrders, new BookingTermicalOrdersTransformer());
+
     }
 
 }

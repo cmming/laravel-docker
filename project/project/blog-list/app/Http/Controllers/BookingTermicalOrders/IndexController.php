@@ -52,6 +52,7 @@ class IndexController extends Controller
             'end_time' => $request->input('end_time'),
             'btime' => $request->input('date').' '.$request->input('start_time'),
             'etime' =>  $request->input('date').' '.$request->input('end_time'),
+            'user_id'=>auth()->user()->id
         ];
 
         $bookingTermicalOrder = $this->bookingTermicalOrders->create($bookingTermicalOrder);
@@ -67,10 +68,10 @@ class IndexController extends Controller
     {
         $validator = \Validator::make(request()->all() + ['id' => $id], [
             'id' => 'required|exists:booking_termical_orders,id',
-            'termical_id' => 'required|exists:booking_termicals,id',
+//            'termical_id' => 'required|exists:booking_termicals,id',
             'date' => 'required|date_format:"Y-m-d"',
-            'start_time' => 'required|date_format:"H:i"',
-            'end_time' => 'required|date_format:"H:i"',
+            'start_time' => 'required|date_format:"H:i:s"',
+            'end_time' => 'required|date_format:"H:i:s"',
             'state' => 'required|in:1,2,3,4,5',
 
         ]);
@@ -79,7 +80,7 @@ class IndexController extends Controller
         }
 
         $bookingTermicalOrder = [
-            'termical_id' => $request->input('termical_id'),
+//            'termical_id' => $request->input('termical_id'),
             'date' => $request->input('date'),
             'start_time' => $request->input('start_time'),
             'end_time' => $request->input('end_time'),

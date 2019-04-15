@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Models\BookingTermicalOrders;
 
 //class User extends Authenticatable
 class User extends Authenticatable implements JWTSubject
@@ -55,5 +56,9 @@ class User extends Authenticatable implements JWTSubject
     {
 //        var_dump($token);exit();
         $this->notify(new \App\Notifications\ResetPassword($token));
+    }
+
+    public function termicalOrders(){
+        return $this->belongsTo(BookingTermicalOrders::class,'user_id','id');
     }
 }

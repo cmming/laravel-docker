@@ -56,6 +56,9 @@ $api->version('v1', [
             //测试redis 使用
             $api->post('pushInstructions.do', ['uses' => 'User\IndexController@setInstructions', 'description' => "从redis设置数据"]);
             $api->get('pullInstructions.do', ['uses' => 'User\IndexController@getInstructions', 'description' => "从redis读取数据"]);
+
+            //用户的预约订单
+            $api->get('/bookingTermicalOrders', ['uses' => 'User\IndexController@termicalOrders', 'description' => "获取用户自己的预约订单"]);
         });
 
         //角色管理
