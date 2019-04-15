@@ -19,7 +19,8 @@ class IndexController extends Controller
 
     public function index()
     {
-        $bookingTermicalOrders = $this->bookingTermicalOrders->paginate();
+        //预加载多个关联 减少数据查询的次数
+        $bookingTermicalOrders = $this->bookingTermicalOrders->with(['user','termical'])->paginate();
 
         return $this->response->paginator($bookingTermicalOrders, new BookingTermicalOrdersTransformer());
     }
