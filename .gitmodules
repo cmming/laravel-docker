@@ -1,0 +1,3 @@
+[submodule "project/project/elasticsearch-head"]
+	path = project/project/elasticsearch-head
+	url = https://github.com/mobz/elasticsearch-head.git

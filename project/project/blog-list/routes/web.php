@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/test/elastic', function () {
-    $hosts = [
-        'http://172.20.0.3:9200',
-    ];
-    $client = \Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+//    $hosts = [
+//        'http://172.30.0.4:9200',
+//    ];
+    $client = \Elasticsearch\ClientBuilder::create()->setHosts(config('elasticsearch.hosts'))->build();
     try {
         $response = $client->info();
         return $response;
