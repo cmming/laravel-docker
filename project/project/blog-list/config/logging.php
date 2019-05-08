@@ -36,6 +36,7 @@ return [
         'stack' => [
             'driver' => 'stack',
             'channels' => explode(',', env('STACK_CHANELS', 'single')),
+            'tap' => [App\Logging\ApplogFormatter::class],
         ],
 
         'single' => [
