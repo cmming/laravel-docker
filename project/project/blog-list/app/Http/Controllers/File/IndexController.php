@@ -28,7 +28,6 @@ class IndexController extends Controller
         $name = $path;
         //取出所用的文件驱动类型
         $path = config('filesystems.disks.'.config('filesystems.default').'.root') . '/' . $path;
-        dd($path);
         return [
             "name" => $name,
             "type" => \File::type($path),

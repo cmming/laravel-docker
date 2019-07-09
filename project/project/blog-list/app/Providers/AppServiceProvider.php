@@ -14,7 +14,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        \Config::set('app.locale', 'vi');
     }
 
     /**
@@ -25,7 +24,5 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-
     }
 }

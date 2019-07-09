@@ -16,3 +16,8 @@
 
 ### docker-compose 扩容
      docker-compose up -d --sacle nginx=2 (docker-compose scale nginx=3)
+     
+### 启动常见的服务
+
+    docker-compose up -d nginx mysql kibana 
+    docker-compose up -d nginx mysql php-fpm redis workspace beanstalkd kibana elasticsearch portainer 

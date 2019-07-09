@@ -29,6 +29,7 @@ class ApplogFormatter
             $handler->pushProcessor(new MemoryUsageProcessor);
             //将峰值内存使用量添加到日志记录中
             $handler->pushProcessor(new MemoryPeakUsageProcessor);
+            //日志格式转换器
             $handler->setFormatter(new JsonFormatter());
         }
     }

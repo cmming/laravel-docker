@@ -170,7 +170,8 @@ return [
         ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
 
         App\Providers\ElasticSearchClientProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        SwooleTW\Http\LaravelServiceProvider::class,
 
     ],
 

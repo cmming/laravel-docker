@@ -22,7 +22,7 @@ $api = app('Dingo\Api\Routing\Router');
 //,'verified' 邮箱验证中间件 后期制作
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers',
-//    'middleware' => 'lang',
+    'middleware' => 'lang',
 ], function ($api) {
 
     $api->group(['prefix' => 'auth'], function ($api) {
