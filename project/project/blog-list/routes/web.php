@@ -11,14 +11,53 @@
 |
 */
 
+//跳转到登陆页面 然后会跳转到是否授权的页面
+Route::get('login', function () {
+    return redirect('http://www.baidu.com');
+})->name('login');
+
+Route::get(/**
+ * @param \App\Models\OauthClients $oauthClients
+ * @param Request $request
+ * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+ */
+    '/authorize', function (App\Models\OauthClients $oauthClients) {
+    $client = $oauthClients->where('id','=',2)->first();
+    $scopes = [];
+    return view('vendor.passport.authorize',compact('client','scopes'));
+});
+//
+Route::get('/redirect', function () {
+    $query = http_build_query([
+        'client_id' => '1',
+        'redirect_uri' => 'http://192.168.50.58/callback',
+        'response_type' => 'code',
+        'client_secret'=>'IZWN2wZN3dDQyZuso59n5tfn5VzqaEZHpdD5Ejdn',
+        'scope' => '*',
+    ]);
+
+    return redirect('http://192.168.50.58/oauth/authorize?'.$query);
+});
+
+Route::get('/callback', function (Illuminate\Http\Request $request) {
+    $http = new \GuzzleHttp\Client;
+
+    $response = $http->post('http://192.168.50.58/oauth/token', [
+        'form_params' => [
+            'grant_type' => 'authorization_code',
+            'client_id' => '1',
+            'client_secret' => 'euwSLAk4UjkaYtKPlQuotL2v5nbyX8qUvGpEnQ49',
+            'redirect_uri' => 'http://www.baidu.com',
+            'code' => $request->code,
+        ],
+    ]);
+    return json_decode((string) $response->getBody(), true);
+});
 Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/test/elastic', function () {
-    $hosts = [
-        'http://172.20.0.3:9200',
-    ];
-    $client = \Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
+    $client = \Elasticsearch\ClientBuilder::create()->setHosts(config('elasticsearch.hosts'))->build();
     try {
         $response = $client->info();
         return $response;

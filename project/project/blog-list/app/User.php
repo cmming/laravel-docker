@@ -56,4 +56,5 @@ class User extends Authenticatable implements JWTSubject
 //        var_dump($token);exit();
         $this->notify(new \App\Notifications\ResetPassword($token));
     }
+
 }

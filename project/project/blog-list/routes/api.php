@@ -22,17 +22,19 @@ $api = app('Dingo\Api\Routing\Router');
 //,'verified' 邮箱验证中间件 后期制作
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers',
+    'middleware' => 'lang',
 ], function ($api) {
 
     $api->group(['prefix' => 'auth'], function ($api) {
         $api->get('captcha.jpg', ['uses' => 'User\IndexController@captcha', 'description' => "获取验证码"]);
         $api->post('login', ['uses' => 'AuthController@login', 'description' => "用户登陆"])->name('login');
         $api->post('refresh', ['uses' => 'AuthController@refresh', 'description' => "刷新token"]);
+        $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
     });
 
     $api->group(['middleware' => ['api', 'jwt.auth', 'operationLog']], function ($api) {
         $api->group(['prefix' => 'auth'], function ($api) {
-            $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
+//            $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
             $api->post('me', ['uses' => 'AuthController@me', 'description' => "获取自己信息"]);
         });
 
@@ -54,6 +56,7 @@ $api->version('v1', [
             //测试redis 使用
             $api->post('pushInstructions.do', ['uses' => 'User\IndexController@setInstructions', 'description' => "从redis设置数据"]);
             $api->get('pullInstructions.do', ['uses' => 'User\IndexController@getInstructions', 'description' => "从redis读取数据"]);
+
         });
 
         //角色管理
@@ -95,11 +98,12 @@ $api->version('v1', [
             $api->get('/curentFile', ['uses' => 'File\IndexController@index', 'description' => "获取指定文件路径的结构"]);
         });
 
+
     });
     $api->group(['prefix' => 'user'], function ($api) {
         $api->post('register', ['uses' => 'User\RegisterController@register', 'description' => "用户注册"])->name('register');
     });
-    //邮箱服务
+//邮箱服务
     $api->group(['prefix' => 'mail'], function ($api) {
         //发送 注册 邮件 验证码
         $api->get('sendMailToRegister', ['uses' => 'Tool\MailController@sendMailToRegister', 'description' => "注册时邮箱验证码"]);

@@ -38,9 +38,13 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+            'driver' => 'passport',
+            'provider' => 'useroauth',
         ],
+//        'web' => [
+//            'driver' => 'session',
+//            'provider' => 'users',
+//        ],
 
         'api' => [
 //            'driver' => 'token',
@@ -70,6 +74,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'useroauth' => [
+            'driver' => 'eloquent',
+            'model' => App\UserOauth::class,
         ],
 
         // 'users' => [

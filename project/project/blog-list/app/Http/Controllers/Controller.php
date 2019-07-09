@@ -23,6 +23,10 @@ class Controller extends BaseController
         return $key;
     }
 
+    /**
+     * 返回请求参数异常
+     * @param $validator 响应的错误信息
+     */
     protected function errorBadRequest($validator)
     {
         // github like error messages
@@ -47,5 +51,26 @@ class Controller extends BaseController
         }
 
         throw new ValidationHttpException($result);
+    }
+
+    /**
+     * 创建数据失败
+     */
+    protected function createError(){
+        return $this->response->error(__("Create error"), 404);
+    }
+
+    /**
+     * 更新数据失败
+     */
+    protected function updateError(){
+        return $this->response->error(__("Update error"), 404);
+    }
+
+    /**
+     * 删除失败
+     */
+    protected function deleteError(){
+        return $this->response->error(__("Delete error"), 404);
     }
 }

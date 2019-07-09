@@ -28,7 +28,7 @@ class ElasticSearchClientProvider extends ServiceProvider
 //            $monolog = Log::getMonolog();
             $monolog = Log::getLogger();
             $elasticSearchLogHandler = new ElasticSearchLogHandler();
-            // $monolog->popHandler(); // 把默认的文件存储去掉，否则会将日志同时存储到文件和ElasticSearch
+//             $monolog->popHandler(); // 把默认的文件存储去掉，否则会将日志同时存储到文件和ElasticSearch
             $monolog->pushHandler($elasticSearchLogHandler); // 添加 ElasticSearch 日志存储句柄
         }
     }

@@ -35,7 +35,8 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => explode(',', env('STACK_CHANELS', 'single')),
+            'tap' => [App\Logging\ApplogFormatter::class],
         ],
 
         'single' => [
@@ -48,7 +49,8 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
-            'days' => 7,
+            'days' => env('DAILY_DAYS', 7),
+            'tap' => [App\Logging\ApplogFormatter::class],
         ],
 
         'slack' => [

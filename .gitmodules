@@ -1,0 +1,6 @@
+[submodule "project/project/elasticsearch-head"]
+	path = project/project/elasticsearch-head
+	url = https://github.com/mobz/elasticsearch-head.git
+[submodule "project/project/laravelDocker"]
+	path = project/project/laravelDocker
+	url = https://github.com/laradock/laradock.git
