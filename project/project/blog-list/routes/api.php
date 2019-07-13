@@ -31,6 +31,7 @@ $api->version('v1', [
         $api->post('refresh', ['uses' => 'AuthController@refresh', 'description' => "刷新token"]);
         $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
     });
+    $api->post('authorization/user/info', ['uses' => 'AuthController@info', 'description' => "用户菜单"]);
 
     $api->group(['middleware' => ['api', 'jwt.auth', 'operationLog']], function ($api) {
         $api->group(['prefix' => 'auth'], function ($api) {
@@ -41,17 +42,17 @@ $api->version('v1', [
         //管理用户
         $api->group(['prefix' => 'user'], function ($api) {
             //管理员列表
-            $api->get('list', ['uses' => 'User\IndexController@index', 'description' => "获取管理员信息"]);
+            $api->get('', ['uses' => 'User\IndexController@index', 'description' => "获取管理员信息"]);
             //管理员信息
-            $api->get('info/{userid}', ['uses' => 'User\IndexController@show', 'description' => "获取管理员详情"]);
+            $api->get('/{userid}', ['uses' => 'User\IndexController@show', 'description' => "获取管理员详情"]);
             //添加用户
-            $api->post('save', ['uses' => 'User\IndexController@store', 'description' => "添加管理员"]);
+            $api->post('', ['uses' => 'User\IndexController@store', 'description' => "添加管理员"]);
             //重置密码
             $api->put('password', ['uses' => 'User\IndexController@ResetPwd', 'description' => "修改管理员密码"]);
             //修改用户信息
-            $api->put('update/{userid}', ['uses' => 'User\IndexController@update', 'description' => "修改管理员信息"]);
+            $api->put('/{userid}', ['uses' => 'User\IndexController@update', 'description' => "修改管理员信息"]);
             //删除用户
-            $api->delete('delete/{userid}', ['uses' => 'User\IndexController@delete', 'description' => "删除管理员"]);
+            $api->delete('/{userid}', ['uses' => 'User\IndexController@delete', 'description' => "删除管理员"]);
 
             //测试redis 使用
             $api->post('pushInstructions.do', ['uses' => 'User\IndexController@setInstructions', 'description' => "从redis设置数据"]);
@@ -66,6 +67,8 @@ $api->version('v1', [
             $api->get('/{roleId}', ['uses' => 'Role\IndexController@show', 'description' => "获取一个角色详情"]);
             $api->put('/{roleId}', ['uses' => 'Role\IndexController@update', 'description' => "更新一个角色信息"]);
             $api->delete('/{roleId}', ['uses' => 'Role\IndexController@delete', 'description' => "删除一个角色"]);
+            $api->get('/routers/{roleId}', ['uses' => 'Role\IndexController@routers', 'description' => "获取路由的router"]);
+            $api->put('/routers/{roleId}', ['uses' => 'Role\IndexController@storeRouter', 'description' => "修改一个角色拥有的路由"]);
         });
 
 
@@ -79,6 +82,19 @@ $api->version('v1', [
         });
 
         //接口管理
+        //router 管理
+        $api->group(['prefix' => 'router'], function ($api) {
+            //管理员列表
+            $api->get('', ['uses' => 'Router\IndexController@index', 'description' => "获取Router信息"]);
+            //管理员信息
+            $api->get('/{id}', ['uses' => 'Router\IndexController@show', 'description' => "获取Router详情"]);
+            //添加用户
+            $api->post('', ['uses' => 'Router\IndexController@store', 'description' => "添加Router"]);
+            //修改用户信息
+            $api->put('/{id}', ['uses' => 'Router\IndexController@update', 'description' => "修改Router信息"]);
+            //删除用户
+            $api->delete('', ['uses' => 'Router\IndexController@destroy', 'description' => "删除管理员"]);
+        });
 
         $api->group(['prefix' => 'api'], function ($api) {
             $api->get('', ['uses' => 'Api\IndexController@index', 'description' => "获取api列表"]);

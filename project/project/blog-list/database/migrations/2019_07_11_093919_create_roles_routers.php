@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateBookingTermicalOrders extends Migration
+class CreateRolesRouters extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class UpdateBookingTermicalOrders extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('booking_termical_orders', function (Blueprint $table) {
-            $table->integer('user_id')->comment('用户编号')->after('termical_id');
+        Schema::create('roles_routers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('role_id');
+            $table->integer('router_id');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class UpdateBookingTermicalOrders extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('roles_routers');
     }
 }

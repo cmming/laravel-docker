@@ -44,7 +44,7 @@ class IndexController extends Controller
     {
         $validator = \Validator::make(request()->all(), [
             'email' => 'email|unique:users,email',
-            'name' => 'required|string',
+            'name' => 'required|string||unique:users,name',
             'password' => 'required',
         ]);
         if ($validator->fails()) {
@@ -115,6 +115,8 @@ class IndexController extends Controller
         }
 
         $this->user->find($id)->delete();
+
+        return $this->response->noContent();
     }
 
     public function setInstructions(Request $request)

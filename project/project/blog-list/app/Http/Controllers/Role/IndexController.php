@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Role;
 
+use App\Models\Router;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,10 +14,12 @@ class IndexController extends Controller
     //
 
     private $role;
+    private $router;
 
-    public function __construct(Role $role)
+    public function __construct(Role $role, Router $router)
     {
         $this->role = $role;
+        $this->router = $router;
     }
 
 
@@ -64,7 +67,7 @@ class IndexController extends Controller
 
     public function update($id, Request $request)
     {
-        $validator = \Validator::make(request()->all()+ ['id' => $id], [
+        $validator = \Validator::make(request()->all() + ['id' => $id], [
             'id' => 'required|exists:roles,id',
             'name' => 'required|string',
             'description' => 'required|string',
@@ -83,10 +86,9 @@ class IndexController extends Controller
     }
 
 
-
     public function delete($id)
     {
-        $validator = \Validator::make(['id'=>$id], [
+        $validator = \Validator::make(['id' => $id], [
             'id' => 'required|exists:roles,id',
         ]);
         if ($validator->fails()) {
@@ -94,6 +96,54 @@ class IndexController extends Controller
         }
 
         $this->role->find($id)->delete();
+    }
+
+    public function routers($id)
+    {
+        $validator = \Validator::make(['id' => $id], [
+            'id' => 'required|exists:roles,id',
+        ]);
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator);
+        }
+
+        $routers = $this->role->find($id)->routers()->get()->toArray();
+
+        $role_routers = array_column($routers, 'id');
+        return $this->response->array($role_routers);
+    }
+
+
+    public function storeRouter($id)
+    {
+        //TODO 没有检测路由的id
+        $validator = \Validator::make(request(['routers_id']), [
+            'routers_id' => 'required|array',
+        ]);
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator);
+        }
+        //获取这个橘色之前拥有的菜单
+        $role = $this->role->find($id);
+        $roleRouter = $role->routers;
+
+        //选中的
+        $checkRoleRouter = $this->router->findMany(request('routers_id'));
+
+        //添加的
+        $addRouters = $checkRoleRouter->diff($roleRouter);
+        foreach ($addRouters as $addRouter) {
+            $role->addRouter($addRouter);
+        }
+
+        //减少的
+        $delRouters = $roleRouter->diff($checkRoleRouter);
+        foreach ($delRouters as $delRouter) {
+            $role->detachRouter($delRouter);
+        }
+
+
+        return $this->response->noContent();
     }
 
 

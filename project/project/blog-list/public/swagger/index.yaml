@@ -88,7 +88,7 @@ paths:
             - 用户登录
           summary: 刷新token
 
-  /user/list:
+  /user:
     get:
       tags:
         - 管理员管理
@@ -123,7 +123,7 @@ paths:
           description: 返回管理员列表
           schema:
             $ref: '#/definitions/SysUserEntityList'
-  /user/info/{userId}:
+  /user/{userId}:
     get:
       tags:
         - 管理员管理
@@ -167,7 +167,7 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /user/save:
+  /user:
     post:
       tags:
         - 管理员管理
@@ -186,7 +186,7 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /user/update/{userid}:
+  /user/{userid}:
     put:
       tags:
         - 管理员管理
@@ -210,7 +210,7 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /user/delete/{userid}:
+  /user/{userid}:
     delete:
       tags:
         - 管理员管理
