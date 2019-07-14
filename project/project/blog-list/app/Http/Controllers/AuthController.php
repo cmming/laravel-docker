@@ -114,7 +114,6 @@ class AuthController extends Controller
                 [
                     "path" => '/admin/dashborad',
                     "component" => 'layout/index',
-                    "redirect" => 'noRedirect',
                     "name" => 'dashborad',
                     "meta" => [
                         "title" => 'dashborad',
@@ -133,7 +132,6 @@ class AuthController extends Controller
                 [
                     "path" => '/admin/ui',
                     "component" => 'layout/index',
-                    "redirect" => 'noRedirect',
                     "name" => 'ui',
                     "meta" => [
                         "title" => 'ui',
@@ -170,7 +168,6 @@ class AuthController extends Controller
                 [
                     "path" => '/admin',
                     "component" => 'layout/index',
-                    "redirect" => 'noRedirect',
                     "name" => 'user',
                     "meta" => [
                         "title" => 'user',

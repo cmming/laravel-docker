@@ -31,12 +31,13 @@ $api->version('v1', [
         $api->post('refresh', ['uses' => 'AuthController@refresh', 'description' => "刷新token"]);
         $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
     });
-    $api->post('authorization/user/info', ['uses' => 'AuthController@info', 'description' => "用户菜单"]);
+
 
     $api->group(['middleware' => ['api', 'jwt.auth', 'operationLog']], function ($api) {
         $api->group(['prefix' => 'auth'], function ($api) {
 //            $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
             $api->post('me', ['uses' => 'AuthController@me', 'description' => "获取自己信息"]);
+            $api->post('authorization/user/info', ['uses' => 'AuthController@info', 'description' => "用户信息"]);
         });
 
         //管理用户

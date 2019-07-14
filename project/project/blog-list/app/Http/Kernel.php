@@ -21,6 +21,8 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrustProxies::class,
         \Barryvdh\Cors\HandleCors::class,
         \App\Http\Middleware\ElasticSearchLog::class,
+        \App\Http\Middleware\Lang::class,
+        \App\Http\Middleware\OperationLog::class
     ];
 
     /**

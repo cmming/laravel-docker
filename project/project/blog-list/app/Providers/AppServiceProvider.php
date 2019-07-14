@@ -14,6 +14,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        //取消 Dingo\Api 接管 异常
+//        app('api.exception')->register(function (\Exception $exception) {
+//            $request = \Request::capture();
+//            return app('App\Exceptions\Handler')->render($request, $exception);
+//        });
     }
 
     /**
