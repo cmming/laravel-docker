@@ -131,7 +131,7 @@ $api->version('v1', [
         //重置密码
         $api->post('ResetPwd', [
             'uses' => 'Tool\MailController@ResetPwd',
-            'des' => '保存前端路由',
+            'des' => '重置密码',
         ]);
     });
 

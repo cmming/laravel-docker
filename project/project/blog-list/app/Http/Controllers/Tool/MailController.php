@@ -40,7 +40,7 @@ class MailController extends Controller
         // 用户注册成功后发送邮件
         dispatch(new SendRegisterEmail($email, $code));
 
-        return $this->response->created();
+        return $this->response->noContent();
     }
 
     /**

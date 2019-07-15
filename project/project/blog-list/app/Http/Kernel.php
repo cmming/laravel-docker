@@ -22,7 +22,7 @@ class Kernel extends HttpKernel
         \Barryvdh\Cors\HandleCors::class,
         \App\Http\Middleware\ElasticSearchLog::class,
         \App\Http\Middleware\Lang::class,
-        \App\Http\Middleware\OperationLog::class
+//        \App\Http\Middleware\OperationLog::class
     ];
 
     /**
