@@ -33,7 +33,7 @@ class OperationLog
         $log->url = $request->path();
         $log->method = $request->method();
         $log->ip = $request->ip();
-        $log->operation = \Request::route()->action['description'] ? \Request::route()->action['description'] : '';
+        $log->operation = \Request::route()&&\Request::route()->action['description'] ? \Request::route()->action['description'] : '';
 //        dd($api_id = \Request::route()->action['description']);
         $log->params = json_encode($input, JSON_UNESCAPED_UNICODE);
         $log->response = json_encode($response, JSON_UNESCAPED_UNICODE);
