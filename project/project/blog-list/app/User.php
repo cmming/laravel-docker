@@ -57,4 +57,23 @@ class User extends Authenticatable implements JWTSubject
         $this->notify(new \App\Notifications\ResetPassword($token));
     }
 
+    //一个用户的 角色
+    public function roles(){
+
+        return $this->belongsToMany('App\User', 'users_roles', 'role_id', 'user_id')->withPivot('role_id', 'user_id');
+    }
+
+    //为用户添加 角色
+    public function addRoles($role){
+
+        return $this->roles()->save($role);
+    }
+
+
+    //为用户删除角色
+    public function deleteRoles($role){
+
+        return $this->roles()->detach($role);
+    }
+
 }

@@ -27,6 +27,21 @@ class IndexController extends Controller
 
     public function index()
     {
+//        $all_router = Router::all();
+//        $result = [];
+//
+//        echo (json_encode($all_router));exit();
+//
+//        foreach ($all_router as $key=>$router){
+//            if($router['parent_id']==0){
+//                $result[] = $router;
+//            }
+//        }
+
+
+//        echo (json_encode($result));exit();
+//        dd($all_router);
+
         $routers = $this->router->where('parent_id', '=', 0)->orderBy('sort', 'desc')->get()->toArray();
 
         $routers = $this->delSonRouter($routers);
@@ -35,15 +50,30 @@ class IndexController extends Controller
 
     }
 
+    private function createSonRouter($routers){
+
+    }
+
     private function delSonRouter($routers)
     {
+
+        static $temp = array();
 
         foreach ($routers as $key => $router) {
             //
             $son_routers = $this->router->find($router['id'])->son_routers()->orderBy('sort', 'desc')->get()->toArray();
+            if($router['id']==35){
+                \Log::info($routers);
+//                echo json_encode($son_routers);exit();
+            }
             if (count($son_routers)) {
                 $routers[$key]['children'] = $son_routers;
                 $this->delSonRouter($son_routers);
+            }
+
+            if($router['id']==35){
+                \Log::info($routers);
+//                echo json_encode($son_routers);exit();
             }
         }
 

@@ -44,6 +44,13 @@ class IndexController extends Controller
     public function uploadCompanyImg(Request $request)
     {
 
+        $validator = \Validator::make(request()->all(), [
+            'file' => 'required|file',
+        ]);
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator);
+        }
+
         $file = $request->file('file');
         header('Content-type: application/json');
         // 文件是否上传成功

@@ -161,7 +161,7 @@ class AuthController extends Controller
                             "path" => 'imgCropper',
                             "component" => 'moudles/ui/views/imgCropper',
                             "name" => 'imgCropper',
-                            "meta" => ["title" => 'imgCropper', "icon" => 'dashboard', "type" => "menu", "hidden" => true, "model" => 'ui']
+                            "meta" => ["title" => 'imgCropper', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'ui']
                         ]
                     ]
                 ],

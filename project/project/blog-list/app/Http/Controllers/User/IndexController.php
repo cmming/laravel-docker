@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redis;
@@ -14,10 +15,12 @@ class IndexController extends Controller
 {
     private $user;
     private $bookingTermicalOrders;
+
     //
-    public function __construct(User $user)
+    public function __construct(User $user, Role $role)
     {
         $this->user = $user;
+        $this->role = $role;
     }
 
     public function index()
@@ -57,9 +60,17 @@ class IndexController extends Controller
             'password' => bcrypt($request->input('password'))
         ];
 
-        $user = $this->user->create($newUser);
-
-        return $this->response->created();
+        \DB::beginTransaction();
+        try{
+            $user = $this->user->create($newUser);
+            $this->updateUserRoles($request['roles'], $user);
+            \DB::commit();
+            return $this->response->created();
+        }catch (\Exception $e) {
+            \DB::rollBack();
+            \Log::error('用户创建失败,创建参数为：'.request()->all());
+            return $this->createError();
+        }
     }
 
     public function ResetPwd(Request $request)
@@ -89,7 +100,7 @@ class IndexController extends Controller
 
     public function update($id, Request $request)
     {
-        $validator = \Validator::make(request()->all()+ ['id' => $id], [
+        $validator = \Validator::make(request()->all() + ['id' => $id], [
             'id' => 'required|exists:users,id',
             'name' => 'required|string'
         ]);
@@ -107,7 +118,7 @@ class IndexController extends Controller
 
     public function delete($id)
     {
-        $validator = \Validator::make(['id'=>$id], [
+        $validator = \Validator::make(['id' => $id], [
             'id' => 'required|exists:users,id',
         ]);
         if ($validator->fails()) {
@@ -136,6 +147,46 @@ class IndexController extends Controller
     {
 //        return \Captcha::img('1111111111');
         return $this->response->array(app('captcha')->create('default', true));
+    }
+
+    public function updateUserRoles($roles, $user)
+    {
+        //数组验证
+        $validator = \Validator::make(['roles' => $roles], [
+            'roles' => 'array',
+        ]);
+        if ($validator->fails()) {
+            return $this->errorBadRequest($validator);
+        }
+        //验证数组的每一项
+        foreach ($roles as $role) {
+            $validator = \Validator::make(['role' => $role], [
+                'role' => 'unique:roles,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->errorBadRequest($validator);
+            }
+        }
+
+        //选中的角色
+        $checkRoles = $this->role->findMany($roles);
+        //用户拥有的角色
+        $userRoles = $user->roles;
+
+        //添加的角色
+        $addRoles = $checkRoles->diff($userRoles);
+        foreach ($addRoles as $addRole) {
+            $user->addRoles($addRole);
+        }
+
+        //删除的角色
+        //减少的
+        $delRoles = $userRoles->diff($checkRoles);
+        foreach ($delRoles as $delRole) {
+            $user->deleteRoles($delRole);
+        }
+
+
     }
 
 
