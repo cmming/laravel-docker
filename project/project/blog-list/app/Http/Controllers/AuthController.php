@@ -108,6 +108,8 @@ class AuthController extends Controller
 
     public function info()
     {
+        $all_router = \DB::select("SELECT * FROM routers ORDER BY sort DESC");
+        $testRouterList = $this->getTree($all_router, 0);
 
         $result = [
             "routerList" => [
@@ -225,9 +227,24 @@ class AuthController extends Controller
                     ]]
                 ],
             ],
+            "indexPage" =>"/admin/dashborad/index",
+            "testRouterList"=>$testRouterList
         ];
 
         return $result;
+    }
+
+    private function getTree($data, $pId){
+        $tree = [];
+        foreach($data as $k => $v)
+        {
+            if($v->parent_id == $pId)
+            {         //父亲找到儿子
+                $v->children = $this->getTree($data, $v->id);
+                $tree[] = $v;
+            }
+        }
+        return $tree;
     }
 
 

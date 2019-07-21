@@ -27,27 +27,31 @@ class IndexController extends Controller
 
     public function index()
     {
-//        $all_router = Router::all();
-//        $result = [];
+        $all_router = \DB::select("SELECT * FROM routers ORDER BY sort DESC");
+
+
+        $tree = $this->getTree($all_router, 0);
+
+//        $routers = $this->router->where('parent_id', '=', 0)->orderBy('sort', 'desc')->get()->toArray();
 //
-//        echo (json_encode($all_router));exit();
+//        $tree = $this->delSonRouter($routers);
 //
-//        foreach ($all_router as $key=>$router){
-//            if($router['parent_id']==0){
-//                $result[] = $router;
-//            }
-//        }
+        return $tree;
+
+    }
 
 
-//        echo (json_encode($result));exit();
-//        dd($all_router);
-
-        $routers = $this->router->where('parent_id', '=', 0)->orderBy('sort', 'desc')->get()->toArray();
-
-        $routers = $this->delSonRouter($routers);
-
-        return $routers;
-
+    private function getTree($data, $pId){
+        $tree = [];
+        foreach($data as $k => $v)
+        {
+            if($v->parent_id == $pId)
+            {         //父亲找到儿子
+                $v->children = $this->getTree($data, $v->id);
+                $tree[] = $v;
+            }
+        }
+        return $tree;
     }
 
     private function createSonRouter($routers){
@@ -57,27 +61,19 @@ class IndexController extends Controller
     private function delSonRouter($routers)
     {
 
-        static $temp = array();
+        $tree = [];
 
         foreach ($routers as $key => $router) {
             //
             $son_routers = $this->router->find($router['id'])->son_routers()->orderBy('sort', 'desc')->get()->toArray();
-            if($router['id']==35){
-                \Log::info($routers);
-//                echo json_encode($son_routers);exit();
-            }
             if (count($son_routers)) {
-                $routers[$key]['children'] = $son_routers;
+                $router['children'] = $son_routers;
                 $this->delSonRouter($son_routers);
-            }
-
-            if($router['id']==35){
-                \Log::info($routers);
-//                echo json_encode($son_routers);exit();
+                $tree[] = $router;
             }
         }
 
-        return $routers;
+        return $tree;
     }
 
     public function show($id)
