@@ -68,7 +68,7 @@ class IndexController extends Controller
             return $this->response->created();
         }catch (\Exception $e) {
             \DB::rollBack();
-            \Log::error('用户创建失败,创建参数为：'.request()->all());
+            \Log::error('用户创建失败');
             return $this->createError();
         }
     }
@@ -112,6 +112,20 @@ class IndexController extends Controller
             'name' => $request->input('name'),
         ];
         $this->user->find($id)->update($newUser);
+
+        \DB::beginTransaction();
+        try{
+            $curentUser = $this->user->find($id);
+            $user = $curentUser->update($newUser);
+            $this->updateUserRoles($request['roles'], $curentUser);
+            \DB::commit();
+            return $this->response->noContent();
+        }catch (\Exception $e) {
+            \DB::rollBack();
+            return $this->updateError();
+        }
+
+
 
         return $this->response->noContent();
     }
@@ -159,9 +173,10 @@ class IndexController extends Controller
             return $this->errorBadRequest($validator);
         }
         //验证数组的每一项
+        //TODO 错误没有成功抛出
         foreach ($roles as $role) {
             $validator = \Validator::make(['role' => $role], [
-                'role' => 'unique:roles,id',
+                'role' => 'exists:roles,id',
             ]);
             if ($validator->fails()) {
                 return $this->errorBadRequest($validator);

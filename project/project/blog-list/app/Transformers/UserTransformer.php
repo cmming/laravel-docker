@@ -18,7 +18,8 @@ class UserTransformer extends TransformerAbstract
 {
     public function transform(User $user)
     {
-        return $user->attributesToArray();
+        $userRole = array_column($user->roles->toArray(),'id');
+        return $user->attributesToArray() + ['roles'=>$userRole];
         //添加关联关系
 //        return $user->attributesToArray()+['code'=>Mail::where('email','=',$user->email)->first(['code'])];
     }

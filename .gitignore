@@ -55,3 +55,5 @@ server1
 laradock
 storage
 .composer
+wrk.git
+images

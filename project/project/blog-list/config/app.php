@@ -172,6 +172,7 @@ return [
         App\Providers\ElasticSearchClientProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         SwooleTW\Http\LaravelServiceProvider::class,
+        EloquentFilter\ServiceProvider::class,
 
     ],
 
