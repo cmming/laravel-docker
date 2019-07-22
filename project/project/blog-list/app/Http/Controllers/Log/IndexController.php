@@ -25,9 +25,14 @@ class IndexController extends Controller
 
     public function index(Request $request)
     {
-        $roles = $this->log->filter($request->all())->paginate();
-//        $roles = $this->log->search()->paginate();
+//        $roles = $this->log->filter($request->all())->paginate();
+        $roles = $this->log->search($request->get('key_word'))->paginate(15);
 
         return $this->response->paginator($roles, new LogTransformer());
+    }
+
+    public function delete($id){
+        $this->log->find($id)->delete();
+        return $this->response->noContent();
     }
 }

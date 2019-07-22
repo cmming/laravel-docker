@@ -14,6 +14,6 @@ class LogFilter extends ModelFilter
 
     public function ip($ip)
     {
-        return $this->where('ip', '=', $ip);
+        return $this->where('ip', 'like', "%$ip%");
     }
 }

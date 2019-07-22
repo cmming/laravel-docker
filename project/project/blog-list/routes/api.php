@@ -108,6 +108,8 @@ $api->version('v1', [
         //日志管理
         $api->group(['prefix' => 'log'], function ($api) {
             $api->get('', ['uses' => 'Log\IndexController@index', 'description' => "获取日志列表"]);
+            //删除用户
+            $api->delete('/{id}', ['uses' => 'Log\IndexController@delete', 'description' => "删除日志"]);
         });
 
         //文件管理
