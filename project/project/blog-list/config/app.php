@@ -173,6 +173,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         SwooleTW\Http\LaravelServiceProvider::class,
         EloquentFilter\ServiceProvider::class,
+        App\Providers\DingoServiceProvider::class,
 
     ],
 
