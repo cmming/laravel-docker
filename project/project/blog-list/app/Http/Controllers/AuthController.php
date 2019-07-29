@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LoginRemind;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -234,7 +235,7 @@ class AuthController extends Controller
             "testRouterList"=>$testRouterList
         ];
 
-
+        event(new LoginRemind());
         return $result;
     }
 
