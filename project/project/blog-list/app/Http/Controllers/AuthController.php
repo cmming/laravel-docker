@@ -116,126 +116,126 @@ class AuthController extends Controller
         $testRouterList = $this->getTree($all_router, 0);
 
         $result = [
-            "routerList" => [
-                [
-                    "path" => '/admin/dashborad',
-                    "component" => 'layout/index',
-                    "name" => 'dashborad',
-                    "meta" => [
-                        "title" => 'dashborad',
-                        "icon" => 'dashboard',
-                        "type" => "menu",
-                        "hidden" => false,
-                        "model" => 'dashborad'
-                    ],
-                    "children" => [[
-                        "path" => 'index',
-                        "component" => 'moudles/dashborad/views/index',
-                        "name" => 'dashboradIndex',
-                        "meta" => ["title" => 'dashborad', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'dashborad']
-                    ]]
-                ],
-                [
-                    "path" => '/admin/ui',
-                    "component" => 'layout/index',
-                    "name" => 'ui',
-                    "meta" => [
-                        "title" => 'ui',
-                        "icon" => 'dashboard',
-                        "type" => "menu", "hidden" => false,
-                        "model" => 'ui'
-                    ],
-                    "children" => [[
-                        "path" => 'form',
-                        "component" => 'moudles/ui/views/form',
-                        "name" => 'form',
-                        "meta" => ["title" => 'form', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'ui']
-                    ],
-                        [
-                            "path" => 'table',
-                            "component" => 'moudles/ui/views/table',
-                            "name" => 'table',
-                            "meta" => ["title" => 'table', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'ui']
-                        ],
-                        [
-                            "path" => 'file',
-                            "component" => 'moudles/ui/views/file',
-                            "name" => 'file',
-                            "meta" => ["title" => 'file', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'ui']
-                        ],
-                        [
-                            "path" => 'imgCropper',
-                            "component" => 'moudles/ui/views/imgCropper',
-                            "name" => 'imgCropper',
-                            "meta" => ["title" => 'imgCropper', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'ui']
-                        ]
-                    ]
-                ],
-                [
-                    "path" => '/admin',
-                    "component" => 'layout/index',
-                    "name" => 'user',
-                    "meta" => [
-                        "title" => 'user',
-                        "icon" => 'dashboard',
-                        "type" => "menu", "hidden" => false,
-                        "model" => 'user'
-                    ],
-                    "children" => [[
-                        "path" => 'user',
-                        "component" => 'moudles/user/views/list',
-                        "name" => 'userList',
-                        "meta" => ["title" => 'userList', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'user']
-                    ], [
-                        "path" => 'user/store',
-                        "component" => 'moudles/user/views/form',
-                        "name" => 'userStore',
-                        "meta" => ["title" => 'userStore', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'user']
-                    ], [
-                        "path" => 'user/update/:id',
-                        "component" => 'moudles/user/views/form',
-                        "name" => 'userUpdate',
-                        "meta" => ["title" => 'userUpdate', "icon" => 'dashboard', "type" => "menu", "hidden" => true, "model" => 'user']
-                    ]]
-                ],
-                [
-                    "path" => '/admin/systemManager',
-                    "component" => 'layout/index',
-                    "name" => 'systemManager',
-                    "meta" => [
-                        "title" => 'systemManager',
-                        "icon" => 'dashboard',
-                        "type" => "menu", "hidden" => false,
-                        "model" => 'systemManager'
-                    ],
-                    "children" => [[
-                        "path" => 'router',
-                        "component" => 'moudles/systemManager/views/router',
-                        "name" => 'routerList',
-                        "meta" => ["title" => 'routerList', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'systemManager']
-                    ], [
-                        "path" => 'role',
-                        "component" => 'moudles/systemManager/views/role',
-                        "name" => 'roleList',
-                        "meta" => ["title" => 'roleList', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'systemManager']
-                    ],[
-                        "path" => 'role/store',
-                        "component" => 'moudles/systemManager/views/role.form',
-                        "name" => 'storeRole',
-                        "meta" => ["title" => 'storeRole', "icon" => 'dashboard', "type" => "menu", "hidden" => true, "model" => 'systemManager']
-                    ],[
-                        "path" => 'role/update/:id',
-                        "component" => 'moudles/systemManager/views/role.form',
-                        "name" => 'updateRole',
-                        "meta" => ["title" => 'updateRole', "icon" => 'dashboard', "type" => "menu", "hidden" => true, "model" => 'systemManager']
-                    ]]
-                ],
-            ],
+//            "routerList" => [
+//                [
+//                    "path" => '/admin/dashborad',
+//                    "component" => 'layout/index',
+//                    "name" => 'dashborad',
+//                    "meta" => [
+//                        "title" => 'dashborad',
+//                        "icon" => 'dashboard',
+//                        "type" => "menu",
+//                        "hidden" => false,
+//                        "model" => 'dashborad'
+//                    ],
+//                    "children" => [[
+//                        "path" => 'index',
+//                        "component" => 'moudles/dashborad/views/index',
+//                        "name" => 'dashboradIndex',
+//                        "meta" => ["title" => 'dashborad', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'dashborad']
+//                    ]]
+//                ],
+//                [
+//                    "path" => '/admin/ui',
+//                    "component" => 'layout/index',
+//                    "name" => 'ui',
+//                    "meta" => [
+//                        "title" => 'ui',
+//                        "icon" => 'dashboard',
+//                        "type" => "menu", "hidden" => false,
+//                        "model" => 'ui'
+//                    ],
+//                    "children" => [[
+//                        "path" => 'form',
+//                        "component" => 'moudles/ui/views/form',
+//                        "name" => 'form',
+//                        "meta" => ["title" => 'form', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'ui']
+//                    ],
+//                        [
+//                            "path" => 'table',
+//                            "component" => 'moudles/ui/views/table',
+//                            "name" => 'table',
+//                            "meta" => ["title" => 'table', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'ui']
+//                        ],
+//                        [
+//                            "path" => 'file',
+//                            "component" => 'moudles/ui/views/file',
+//                            "name" => 'file',
+//                            "meta" => ["title" => 'file', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'ui']
+//                        ],
+//                        [
+//                            "path" => 'imgCropper',
+//                            "component" => 'moudles/ui/views/imgCropper',
+//                            "name" => 'imgCropper',
+//                            "meta" => ["title" => 'imgCropper', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'ui']
+//                        ]
+//                    ]
+//                ],
+//                [
+//                    "path" => '/admin',
+//                    "component" => 'layout/index',
+//                    "name" => 'user',
+//                    "meta" => [
+//                        "title" => 'user',
+//                        "icon" => 'dashboard',
+//                        "type" => "menu", "hidden" => false,
+//                        "model" => 'user'
+//                    ],
+//                    "children" => [[
+//                        "path" => 'user',
+//                        "component" => 'moudles/user/views/list',
+//                        "name" => 'userList',
+//                        "meta" => ["title" => 'userList', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'user']
+//                    ], [
+//                        "path" => 'user/store',
+//                        "component" => 'moudles/user/views/form',
+//                        "name" => 'userStore',
+//                        "meta" => ["title" => 'userStore', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'user']
+//                    ], [
+//                        "path" => 'user/update/:id',
+//                        "component" => 'moudles/user/views/form',
+//                        "name" => 'userUpdate',
+//                        "meta" => ["title" => 'userUpdate', "icon" => 'dashboard', "type" => "menu", "hidden" => true, "model" => 'user']
+//                    ]]
+//                ],
+//                [
+//                    "path" => '/admin/systemManager',
+//                    "component" => 'layout/index',
+//                    "name" => 'systemManager',
+//                    "meta" => [
+//                        "title" => 'systemManager',
+//                        "icon" => 'dashboard',
+//                        "type" => "menu", "hidden" => false,
+//                        "model" => 'systemManager'
+//                    ],
+//                    "children" => [[
+//                        "path" => 'router',
+//                        "component" => 'moudles/systemManager/views/router',
+//                        "name" => 'routerList',
+//                        "meta" => ["title" => 'routerList', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'systemManager']
+//                    ], [
+//                        "path" => 'role',
+//                        "component" => 'moudles/systemManager/views/role',
+//                        "name" => 'roleList',
+//                        "meta" => ["title" => 'roleList', "icon" => 'dashboard', "type" => "menu", "hidden" => false, "model" => 'systemManager']
+//                    ],[
+//                        "path" => 'role/store',
+//                        "component" => 'moudles/systemManager/views/role.form',
+//                        "name" => 'storeRole',
+//                        "meta" => ["title" => 'storeRole', "icon" => 'dashboard', "type" => "menu", "hidden" => true, "model" => 'systemManager']
+//                    ],[
+//                        "path" => 'role/update/:id',
+//                        "component" => 'moudles/systemManager/views/role.form',
+//                        "name" => 'updateRole',
+//                        "meta" => ["title" => 'updateRole', "icon" => 'dashboard', "type" => "menu", "hidden" => true, "model" => 'systemManager']
+//                    ]]
+//                ],
+//            ],
             "indexPage" =>"/admin/dashborad/index",
-            "testRouterList"=>$testRouterList
+            "routerList"=>$testRouterList
         ];
 
-        event(new LoginRemind());
+        event(new LoginRemind(auth()->user()));
         return $result;
     }
 
