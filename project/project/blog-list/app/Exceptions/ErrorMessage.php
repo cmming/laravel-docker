@@ -11,6 +11,7 @@ namespace App\Exceptions;
 
 class ErrorMessage
 {
+    const PASSWORD_OR_NAME_ERROR = 400001;
 
     //鉴权错误
     const TOKEN_EXPIRED = 401001;
@@ -24,6 +25,7 @@ class ErrorMessage
 
 
     static public $message = [
+        400001 => "账号或密码错误",
         401001 => "token expired",
         401002 => "token invalid",
         401003 => "token black list",

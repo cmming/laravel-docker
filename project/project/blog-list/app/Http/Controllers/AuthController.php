@@ -6,6 +6,7 @@ use App\Events\LoginRemind;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class AuthController extends Controller
 {
@@ -29,20 +30,20 @@ class AuthController extends Controller
     {
 
 
-//        $validator = \Validator=>=>make($request->all(), [
-//            'email' => 'required|email',
-//            'password' => 'required',
-//            'ckey' => 'required',
-//            'captcha' => 'required|captcha_api=>' . $request->input('ckey')
-//        ],[
-//            'captcha.required' => '验证码不能为空',
-//            'captcha.captcha_api' => '请输入正确的验证码',
-//        ]);
-
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'ckey' => 'required',
+            'captcha' => 'required|captcha_api:'.$request->input('ckey')
+        ],[
+            'captcha.required' => '验证码不能为空',
+            'captcha.captcha_api' => '请输入正确的验证码',
         ]);
+
+//        $validator = \Validator::make($request->all(), [
+//            'name' => 'required',
+//            'password' => 'required'
+//        ]);
 
         if ($validator->fails()) {
             // 错误批量处理
@@ -52,7 +53,7 @@ class AuthController extends Controller
         $credentials = request(['name', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(\App\Exceptions\ErrorMessage::getMessage(\App\Exceptions\ErrorMessage::PASSWORD_OR_NAME_ERROR),400);
         }
 
         return $this->respondWithToken($token);
