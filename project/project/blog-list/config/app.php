@@ -228,6 +228,7 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         //Captcha
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
     ],
 
 ];

@@ -22,7 +22,8 @@
         "swooletw/laravel-swoole": "^2.6",
         "tamayo/laravel-scout-elastic": "^4.0",
         "tucker-eric/eloquentfilter": "^1.4",
-        "tymon/jwt-auth": "1.0.0-rc.3"
+        "tymon/jwt-auth": "1.0.0-rc.3",
+        "vinkla/hashids": "~5.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
