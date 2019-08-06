@@ -53,6 +53,7 @@ class AuthController extends Controller
         $credentials = request(['name', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
+//            return $this->response->errorBadRequest(\App\Exceptions\ErrorMessage::getMessage(\App\Exceptions\ErrorMessage::PASSWORD_OR_NAME_ERROR));
             return response()->json(\App\Exceptions\ErrorMessage::getMessage(\App\Exceptions\ErrorMessage::PASSWORD_OR_NAME_ERROR),400);
         }
 

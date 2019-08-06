@@ -33,7 +33,8 @@ $api->version('v1', [
     });
 
 
-    $api->group(['middleware' => ['api', 'jwt.auth', 'operationLog']], function ($api) {
+//    $api->group(['middleware' => ['api', 'jwt.auth', 'operationLog']], function ($api) {
+    $api->group(['middleware' => ['api', 'jwt.auth']], function ($api) {
         $api->group(['prefix' => 'auth'], function ($api) {
 //            $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
             $api->post('me', ['uses' => 'AuthController@me', 'description' => "获取自己信息"]);
