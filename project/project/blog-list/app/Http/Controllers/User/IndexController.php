@@ -14,7 +14,6 @@ use App\Transformers\UserTransformer;
 class IndexController extends Controller
 {
     private $user;
-    private $bookingTermicalOrders;
 
     //
     public function __construct(User $user, Role $role)
