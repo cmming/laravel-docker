@@ -10,18 +10,17 @@
 namespace App\Transformers;
 
 use App\User;
-use App\Models\Mail;
 use League\Fractal\TransformerAbstract;
 
 
 class UserTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['role'];
+    protected $defaultIncludes = ['role'];
 
     public function transform(User $user)
     {
-        $userRole = array_column($user->roles->toArray(),'id');
-        return $user->attributesToArray() + ['roles'=>$userRole];
+//        $userRole = array_column($user->roles->toArray(), 'id');
+//        return $user->attributesToArray() + ['roles' => $userRole];
         //添加关联关系
 //        return $user->attributesToArray()+['code'=>Mail::where('email','=',$user->email)->first(['code'])];
         return $user->attributesToArray();
@@ -29,10 +28,11 @@ class UserTransformer extends TransformerAbstract
 
     public function includeRole(User $user)
     {
-        if (! $user->roles) {
+        dump($user->role);
+        if (!$user->role) {
             return $this->null();
         }
-        return $this->item($user->roles, new RoleTransformer());
+        return $this->item($user->role, new RoleTransformer());
     }
 
 }

@@ -27,7 +27,7 @@ class IndexController extends Controller
     {
         $users = $this->user->paginate();
 
-        return $this->response->paginator($users, new UserTransformer(), ['key' => 'role']);
+        return $this->response->paginator($users, new UserTransformer());
     }
 
     public function show($id)

@@ -63,6 +63,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany('App\Models\Role', 'users_roles', 'user_id', 'role_id')->withPivot('role_id', 'user_id');
     }
 
+    public function role(){
+
+        return $this->belongsToMany('App\Models\Role', 'users_roles', 'user_id', 'role_id')->withPivot('role_id', 'user_id');
+    }
+
     //为用户添加 角色
     public function addRoles($role){
 
