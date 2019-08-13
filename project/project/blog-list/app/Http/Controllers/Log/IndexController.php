@@ -2,10 +2,12 @@
 namespace App\Http\Controllers\Log;
 
 
+use App\Exports\LogsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Log;
 use App\Transformers\LogTransformer;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Created by PhpStorm.
@@ -34,5 +36,10 @@ class IndexController extends Controller
     public function delete($id){
         $this->log->find($id)->delete();
         return $this->response->noContent();
+    }
+
+    public function export()
+    {
+        return Excel::download(new LogsExport(), 'logs.xlsx');
     }
 }

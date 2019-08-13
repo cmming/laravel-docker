@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Exports\UsersExport;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Redis;
 
 use App\User;
 use App\Transformers\UserTransformer;
+use Maatwebsite\Excel\Facades\Excel;
 
 class IndexController extends Controller
 {
@@ -201,6 +203,12 @@ class IndexController extends Controller
         }
 
 
+    }
+
+
+    public function export()
+    {
+        return Excel::download(new UsersExport(), 'usres.xlsx');
     }
 
 

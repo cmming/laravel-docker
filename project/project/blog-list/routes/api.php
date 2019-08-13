@@ -45,6 +45,7 @@ $api->version('v1', [
         $api->group(['prefix' => 'user'], function ($api) {
             //管理员列表
             $api->get('', ['uses' => 'User\IndexController@index', 'description' => "获取管理员信息"]);
+            $api->get('/export', ['uses' => 'User\IndexController@export', 'description' => "导出管理员列表"]);
             //管理员信息
             $api->get('/{userid}', ['uses' => 'User\IndexController@show', 'description' => "获取管理员详情"]);
             //添加用户
@@ -109,6 +110,7 @@ $api->version('v1', [
         //日志管理
         $api->group(['prefix' => 'log'], function ($api) {
             $api->get('', ['uses' => 'Log\IndexController@index', 'description' => "获取日志列表"]);
+            $api->get('/export', ['uses' => 'Log\IndexController@export', 'description' => "导出日志列表"]);
             //删除用户
             $api->delete('/{id}', ['uses' => 'Log\IndexController@delete', 'description' => "删除日志"]);
         });
