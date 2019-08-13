@@ -174,6 +174,7 @@ return [
         SwooleTW\Http\LaravelServiceProvider::class,
         EloquentFilter\ServiceProvider::class,
         App\Providers\DingoServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -229,6 +230,7 @@ return [
         //Captcha
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
