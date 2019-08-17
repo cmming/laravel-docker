@@ -208,6 +208,7 @@ class IndexController extends Controller
 
     public function export()
     {
+        header('Access-Control-Expose-Headers:Content-Disposition');
         return Excel::download(new UsersExport(), 'usres.xlsx');
     }
 
