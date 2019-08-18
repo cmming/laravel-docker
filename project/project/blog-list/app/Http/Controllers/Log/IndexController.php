@@ -40,6 +40,8 @@ class IndexController extends Controller
 
     public function export()
     {
+        set_time_limit(0);
+        header('Access-Control-Expose-Headers:Content-Disposition');
         return Excel::download(new LogsExport(), 'logs.xlsx');
     }
 }
