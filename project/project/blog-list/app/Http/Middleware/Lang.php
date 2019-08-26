@@ -19,10 +19,11 @@ class Lang
     public function handle($request, Closure $next)
     {
         //判断系统语言
-        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            \Config::set('app.locale', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        if (\Request::header('lang')&&\Request::header('lang')=='en') {
+            \App::setLocale('en');
         } else {
-            \Config::set('app.locale', 'zh_CN');
+
+            \App::setLocale('zh-CN');
         }
         return $next($request);
     }

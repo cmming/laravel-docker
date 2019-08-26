@@ -80,6 +80,17 @@ return [
 //            'root1' => 'C:\/Program Files (x86)\/EasyPHP-12.1\/www',
             // 'timeout' => 30,
         ],
+        'upload_company_img' => [
+            'driver' => 'local',
+            'url' => env('APP_URL') . 'static/images/',
+
+            // 文件将上传到storage/app/uploads目录
+            //'root' => storage_path('static/study/situation'),
+
+            // 文件将上传到static/study/situation目录 如果需要浏览器直接访问 请设置成这个
+
+            'root' => public_path('static/images/'),
+        ],
 
     ],
 

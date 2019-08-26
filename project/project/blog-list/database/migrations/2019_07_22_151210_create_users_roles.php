@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateBookingTermicalOrders extends Migration
+class CreateUsersRoles extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class UpdateBookingTermicalOrders extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('booking_termical_orders', function (Blueprint $table) {
-            $table->integer('state')->after('etime')->default(1)->comment('订单状态 1：未使用 2：使用中 3：已经使用 4：强制下线 5：管理员拒绝订单');
+        Schema::create('users_roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->comment('用户id');
+            $table->integer('role_id')->comment('角色id');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class UpdateBookingTermicalOrders extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('users_roles');
     }
 }

@@ -20,4 +20,4 @@
 ### 启动常见的服务
 
     docker-compose up -d nginx mysql kibana 
-    docker-compose up -d nginx mysql php-fpm redis workspace beanstalkd kibana elasticsearch portainer 
+    docker-compose up -d nginx mysql php-fpm redis workspace beanstalkd kibana elasticsearch portainer laravel-echo-server php-worker

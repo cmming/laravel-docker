@@ -32,26 +32,30 @@ $api->version('v1', [
         $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
     });
 
-    $api->group(['middleware' => ['api', 'jwt.auth', 'operationLog']], function ($api) {
+
+//    $api->group(['middleware' => ['api', 'jwt.auth', 'operationLog']], function ($api) {
+    $api->group(['middleware' => ['api', 'jwt.auth']], function ($api) {
         $api->group(['prefix' => 'auth'], function ($api) {
 //            $api->post('logout', ['uses' => 'AuthController@logout', 'description' => "退出登陆"]);
             $api->post('me', ['uses' => 'AuthController@me', 'description' => "获取自己信息"]);
+            $api->post('authorization/user/info', ['uses' => 'AuthController@info', 'description' => "用户信息"]);
         });
 
         //管理用户
         $api->group(['prefix' => 'user'], function ($api) {
             //管理员列表
-            $api->get('list', ['uses' => 'User\IndexController@index', 'description' => "获取管理员信息"]);
+            $api->get('', ['uses' => 'User\IndexController@index', 'description' => "获取管理员信息"]);
+            $api->get('/export', ['uses' => 'User\IndexController@export', 'description' => "导出管理员列表"]);
             //管理员信息
-            $api->get('info/{userid}', ['uses' => 'User\IndexController@show', 'description' => "获取管理员详情"]);
+            $api->get('/{userid}', ['uses' => 'User\IndexController@show', 'description' => "获取管理员详情"]);
             //添加用户
-            $api->post('save', ['uses' => 'User\IndexController@store', 'description' => "添加管理员"]);
+            $api->post('', ['uses' => 'User\IndexController@store', 'description' => "添加管理员"]);
             //重置密码
             $api->put('password', ['uses' => 'User\IndexController@ResetPwd', 'description' => "修改管理员密码"]);
             //修改用户信息
-            $api->put('update/{userid}', ['uses' => 'User\IndexController@update', 'description' => "修改管理员信息"]);
+            $api->put('/{userid}', ['uses' => 'User\IndexController@update', 'description' => "修改管理员信息"]);
             //删除用户
-            $api->delete('delete/{userid}', ['uses' => 'User\IndexController@delete', 'description' => "删除管理员"]);
+            $api->delete('/{userid}', ['uses' => 'User\IndexController@delete', 'description' => "删除管理员"]);
 
             //测试redis 使用
             $api->post('pushInstructions.do', ['uses' => 'User\IndexController@setInstructions', 'description' => "从redis设置数据"]);
@@ -66,6 +70,8 @@ $api->version('v1', [
             $api->get('/{roleId}', ['uses' => 'Role\IndexController@show', 'description' => "获取一个角色详情"]);
             $api->put('/{roleId}', ['uses' => 'Role\IndexController@update', 'description' => "更新一个角色信息"]);
             $api->delete('/{roleId}', ['uses' => 'Role\IndexController@delete', 'description' => "删除一个角色"]);
+            $api->get('/routers/{roleId}', ['uses' => 'Role\IndexController@routers', 'description' => "获取路由的router"]);
+            $api->put('/routers/{roleId}', ['uses' => 'Role\IndexController@storeRouter', 'description' => "修改一个角色拥有的路由"]);
         });
 
 
@@ -79,6 +85,19 @@ $api->version('v1', [
         });
 
         //接口管理
+        //router 管理
+        $api->group(['prefix' => 'router'], function ($api) {
+            //管理员列表
+            $api->get('', ['uses' => 'Router\IndexController@index', 'description' => "获取Router信息"]);
+            //管理员信息
+            $api->get('/{id}', ['uses' => 'Router\IndexController@show', 'description' => "获取Router详情"]);
+            //添加用户
+            $api->post('', ['uses' => 'Router\IndexController@store', 'description' => "添加Router"]);
+            //修改用户信息
+            $api->put('/{id}', ['uses' => 'Router\IndexController@update', 'description' => "修改Router信息"]);
+            //删除用户
+            $api->delete('', ['uses' => 'Router\IndexController@destroy', 'description' => "删除管理员"]);
+        });
 
         $api->group(['prefix' => 'api'], function ($api) {
             $api->get('', ['uses' => 'Api\IndexController@index', 'description' => "获取api列表"]);
@@ -91,11 +110,15 @@ $api->version('v1', [
         //日志管理
         $api->group(['prefix' => 'log'], function ($api) {
             $api->get('', ['uses' => 'Log\IndexController@index', 'description' => "获取日志列表"]);
+            $api->get('/export', ['uses' => 'Log\IndexController@export', 'description' => "导出日志列表"]);
+            //删除用户
+            $api->delete('/{id}', ['uses' => 'Log\IndexController@delete', 'description' => "删除日志"]);
         });
 
         //文件管理
         $api->group(['prefix' => 'file'], function ($api) {
             $api->get('/curentFile', ['uses' => 'File\IndexController@index', 'description' => "获取指定文件路径的结构"]);
+            $api->post('/uploadCompanyImg', ['uses' => 'File\IndexController@uploadCompanyImg', 'description' => "上传图片"]);
         });
 
 
@@ -114,7 +137,7 @@ $api->version('v1', [
         //重置密码
         $api->post('ResetPwd', [
             'uses' => 'Tool\MailController@ResetPwd',
-            'des' => '保存前端路由',
+            'des' => '重置密码',
         ]);
     });
 

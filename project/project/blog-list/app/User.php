@@ -57,4 +57,42 @@ class User extends Authenticatable implements JWTSubject
         $this->notify(new \App\Notifications\ResetPassword($token));
     }
 
+    //一个用户的 角色
+    public function roles(){
+
+        return $this->belongsToMany('App\Models\Role', 'users_roles', 'user_id', 'role_id')->withPivot('role_id', 'user_id');
+    }
+
+    public function role(){
+
+        return $this->belongsToMany('App\Models\Role', 'users_roles', 'user_id', 'role_id')->withPivot('role_id', 'user_id');
+    }
+
+    //为用户添加 角色
+    public function addRoles($role){
+
+        return $this->roles()->save($role);
+    }
+
+
+    //为用户删除角色
+    public function deleteRoles($role){
+
+        return $this->roles()->detach($role);
+    }
+
+    //一个用户的菜单
+    public function routers(){
+//        $rolesId = array_column($this->roles->toArray(),'id');
+//        dd($rolesId);
+        //获取每个角色的router
+        $routers = [];
+        foreach ($this->roles as $role){
+            $router = $role->routers->toArray();
+            $routers = array_unique($router, SORT_REGULAR);
+        }
+//        dd($routers);
+        return $routers;
+    }
+
 }

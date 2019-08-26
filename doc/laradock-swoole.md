@@ -5,6 +5,7 @@
 ### 安装扩展
 
     WORKSPACE_INSTALL_SWOOLE = true
+    PHP_FPM_INSTALL_SWOOLE=true
     
     docker-compose build workspace
     
@@ -120,9 +121,12 @@ server {
     SWOOLE_HTTP_DAEMONIZE=true
     
 
-    docker-compse exec workspace bash 
+    docker-compose exec workspace bash 
     
     php artisan swoole:http start
+    
+    
+### bug 跨域的时候 不能生效 post 
     
     
     

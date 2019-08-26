@@ -158,7 +158,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         // jwt
@@ -172,6 +172,9 @@ return [
         App\Providers\ElasticSearchClientProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         SwooleTW\Http\LaravelServiceProvider::class,
+        EloquentFilter\ServiceProvider::class,
+        App\Providers\DingoServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -226,6 +229,8 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         //Captcha
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

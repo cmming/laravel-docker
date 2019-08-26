@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use EloquentFilter\Filterable;
 
 class Log extends Model
 {
 //    php artisan scout:import "\App\Models\Log"
-    use Searchable;
+    use Searchable,Filterable;
     // 定义索引里面的type
     public function searchableAs()
     {
@@ -36,4 +37,5 @@ class Log extends Model
     protected $table = "logs";
 
     protected $guarded = [];
+
 }

@@ -73,4 +73,26 @@ class Controller extends BaseController
     protected function deleteError(){
         return $this->response->error(__("Delete error"), 404);
     }
+
+    public function noMustHas($valArr = array())
+    {
+        $result = array();
+        foreach ($valArr as $item) {
+            foreach ($item as $key => $value) {
+                if (request()->has($key)) {
+                    $validator = \Validator::make(request([$key]), [
+                        $key => $value,
+
+                    ]);
+                    if ($validator->fails()) {
+                        return $this->errorBadRequest($validator);
+                    } else {
+                        $result[$key] = request($key);
+                    }
+                };
+            }
+        }
+        return $result;
+
+    }
 }
