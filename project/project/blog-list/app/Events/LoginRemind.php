@@ -44,6 +44,6 @@ class LoginRemind implements ShouldBroadcast
     public function broadcastWith()
     {
         // 返回当前时间
-        return ['name' => '11196891123'];
+        return ['message' => '11196891123'];
     }
 }
