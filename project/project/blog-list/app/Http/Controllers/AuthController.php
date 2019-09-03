@@ -34,8 +34,8 @@ class AuthController extends Controller
             'name' => 'required',
             'password' => 'required',
             'ckey' => 'required',
-            'captcha' => 'required|captcha_api:'.$request->input('ckey')
-        ],[
+            'captcha' => 'required|captcha_api:' . $request->input('ckey')
+        ], [
             'captcha.required' => '验证码不能为空',
             'captcha.captcha_api' => '请输入正确的验证码',
         ]);
@@ -54,7 +54,7 @@ class AuthController extends Controller
 
         if (!$token = auth()->attempt($credentials)) {
 //            return $this->response->errorBadRequest(\App\Exceptions\ErrorMessage::getMessage(\App\Exceptions\ErrorMessage::PASSWORD_OR_NAME_ERROR));
-            return response()->json(\App\Exceptions\ErrorMessage::getMessage(\App\Exceptions\ErrorMessage::PASSWORD_OR_NAME_ERROR),400);
+            return response()->json(\App\Exceptions\ErrorMessage::getMessage(\App\Exceptions\ErrorMessage::PASSWORD_OR_NAME_ERROR), 400);
         }
 
         return $this->respondWithToken($token);
@@ -113,7 +113,7 @@ class AuthController extends Controller
     {
 //        $all_router = \DB::select("SELECT * FROM routers ORDER BY sort DESC");
         $all_router = auth()->user()->routers();
-        array_multisort( array_column($all_router,'sort'),SORT_DESC,$all_router);
+        array_multisort(array_column($all_router, 'sort'), SORT_DESC, $all_router);
 //        dd($all_router);
         $testRouterList = $this->getTree($all_router, 0);
 
@@ -233,33 +233,32 @@ class AuthController extends Controller
 //                    ]]
 //                ],
 //            ],
-            "indexPage" =>"/admin/dashborad/index",
-            "routerList"=>$testRouterList
+            "indexPage" => "/admin/dashborad/index",
+            "routerList" => $testRouterList,
+            "info" => auth()->user()
         ];
 
         event(new LoginRemind(auth()->user()));
         return $result;
     }
 
-    private function getTree($data, $pId){
+    private function getTree($data, $pId)
+    {
         $tree = [];
-        foreach($data as $k => $v)
-        {
+        foreach ($data as $k => $v) {
 //            if($v->parent_id == $pId)
 //            {         //父亲找到儿子
 //                $v->children = $this->getTree($data, $v->id);
 //                $tree[] = $v;
 //            }
 
-            if($v['parent_id'] == $pId)
-            {         //父亲找到儿子
+            if ($v['parent_id'] == $pId) {         //父亲找到儿子
                 $v['children'] = $this->getTree($data, $v['id']);
                 $tree[] = $v;
             }
         }
         return $tree;
     }
-
 
 
 }
