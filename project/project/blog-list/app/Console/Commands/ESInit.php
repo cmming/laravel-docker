@@ -50,7 +50,7 @@ class ESInit extends Command
      */
     private function createTemplate(Client $client)
     {
-        $url = config('scout.elasticsearch.hosts')[0] . '/_template/template_1';
+        $url = config('scout.elasticsearch.hosts')[0] . '/_template/template_1?include_type_name=true';
         $client->put($url, [
             'json' => [
                 'template' => config('scout.elasticsearch.index'),
@@ -87,7 +87,7 @@ class ESInit extends Command
 
     private function createIndex(Client $client)
     {
-        $url = config('scout.elasticsearch.hosts')[0] . '/' . config('scout.elasticsearch.index');
+        $url = config('scout.elasticsearch.hosts')[0] . '/' . config('scout.elasticsearch.index').'?include_type_name=true';
 
         $client->put($url, [
             'json' => [

@@ -167,7 +167,7 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /user:
+  /user1:
     post:
       tags:
         - 管理员管理
@@ -186,7 +186,7 @@ paths:
         '200':
           schema:
             $ref: '#/definitions/R'
-  /user/{userid}:
+  /user1/{userid}:
     put:
       tags:
         - 管理员管理
@@ -194,18 +194,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: userId
-          description: 用户ID
-          in: path
-          type: integer
-          required: true
-        - name: body
-          description: 管理员对象
-          in: body
-          type: string
-          schema:
-            $ref: '#/definitions/SysUserEntityEdit'
-          required: true
+        schema:
+          $ref: '#/definitions/SysUserEntityEdit'
       responses:
         '200':
           schema:

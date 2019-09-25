@@ -14,6 +14,10 @@ VBoxLinuxAdditions.run
         
         mount -t vboxsf nextcloud /home/vesystemcloud
         
+        mount -t vboxsf github /home/github
+        
+        mount -t vboxsf laravelTemplate /home/laravelTemplate
+        
         给文件夹授权
         
 

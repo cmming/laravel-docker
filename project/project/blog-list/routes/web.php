@@ -13,8 +13,8 @@
 
 //跳转到登陆页面 然后会跳转到是否授权的页面
 Route::get('login', function () {
-    return redirect('http://www.baidu.com');
-})->name('register');
+    return redirect('http://192.168.50.58');
+})->name('login');
 
 Route::get(/**
  * @param \App\Models\OauthClients $oauthClients
