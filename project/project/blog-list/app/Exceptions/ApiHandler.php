@@ -45,4 +45,15 @@ class ApiHandler extends DingoHandler
 
         return parent::handle($exception);
     }
+
+    /**
+     * Determine if the exception should be reported.
+     *
+     * @param  \Exception $e
+     * @return bool
+     */
+    public function shouldReport(Exception $e)
+    {
+        // TODO: Implement shouldReport() method.
+    }
 }

@@ -19,6 +19,7 @@ class ErrorMessage
     const TOKEN_BLACKLISTED = 401003;
     const TOKEN_NOT_PROVIDED = 401004;
     const TOKEN_CANT_REFRESHED = 401005;
+    const AUTHORIZATION_CODE_ERROR=401006;
 
     //未知错误
     const UNKNOWN = 404001;
@@ -31,6 +32,7 @@ class ErrorMessage
         401003 => "token black list",
         401004 => "token not provided",    #请求头中没有token
         401005 => "Token has expired and can no longer be refreshed",    #请求头中没有token
+        401006 => "auth grant code error",    #auth2 code 错误
 
 
         404001 => "unknown",

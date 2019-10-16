@@ -34,5 +34,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'blog' => [
+        'appid' => env('CLIENT_ID'),
+        'secret' => env('CLIENT_SECRET'),
+        'callback' => 'http://192.168.50.58/auth/callback'
+    ]
 
 ];

@@ -29,14 +29,14 @@ Route::get(/**
 //
 Route::get('/redirect', function () {
     $query = http_build_query([
-        'client_id' => '1',
+        'client_id' => '4',
         'redirect_uri' => 'http://192.168.50.58/callback',
         'response_type' => 'code',
-        'client_secret'=>'IZWN2wZN3dDQyZuso59n5tfn5VzqaEZHpdD5Ejdn',
+        'client_secret'=>'fjRw1ydZn8cmuBEXZmvvG85u3nYyklrjkCAtI4Fw',
         'scope' => '*',
     ]);
 
-    return redirect('http://192.168.50.58/oauth/authorize?'.$query);
+    return redirect('http://192.168.50.58:82/oauth/authorize?'.$query);
 });
 
 Route::get('/callback', function (Illuminate\Http\Request $request) {
@@ -77,3 +77,12 @@ Route::get('/test/log', function () {
     Log::info('写入成功啦，日志同时写入 文件系统 和 ElasticSearch 系统', ['code' => 0, 'msg' => '成功了，日志同时写入 文件系统 和 ElasticSearch 系统', 'data' => [1,2,3,4,5]]);
     Log::debug('写入成功啦，日志同时写入 文件系统 和 ElasticSearch 系统', ['code' => 0, 'msg' => '成功了，日志同时写入 文件系统 和 ElasticSearch 系统', 'data' => [1,2,3,4,5]]);
 });
+
+//三方授权
+Route::get('/auth', 'Auth\LoginController@oauth');
+Route::get('/auth/callback', 'Auth\LoginController@callback');
+
+Route::get('/auth/client', 'Auth\LoginController@client');
+//Auth::routes();
+//
+//Route::get('/home', 'HomeController@index')->name('home');

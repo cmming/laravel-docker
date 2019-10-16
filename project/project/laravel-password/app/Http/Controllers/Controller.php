@@ -75,7 +75,11 @@ class Controller extends BaseController
     }
 
     protected function authError(){
-        return $this->response->error('用户登录失败', 401);
+        return $this->response->error('账号或密码错误', 401);
+    }
+
+    protected function authRefreshError(){
+        return $this->response->error('toke刷新失败', 401);
     }
 
     public function noMustHas($valArr = array())
